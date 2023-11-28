@@ -51,7 +51,7 @@ class AusPageResource(Resource):
         if not validated:
             return message_to_json(msg, Status.BAD_REQUEST.value)  # Return a 400 Bad Request status code
 
-        # insert new user
+        # insert new ausbildung page
         msg = self.aus_page_query.insert_aus_page()
         return message_to_json(msg=msg, status=Status.CREATED.value)  # Return a 201 Created status code
 
