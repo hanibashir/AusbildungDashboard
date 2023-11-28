@@ -9,6 +9,7 @@ from ...helpers.to_json import message_to_json, row_to_json, rows_to_json
 api = Api(user_blueprint)
 
 
+# get all users
 class UserListResource(Resource):
     def __init__(self):
         self.user_query = UserQueries()
@@ -20,6 +21,7 @@ class UserListResource(Resource):
 
 class UserResource(Resource):
     def __init__(self):
+        # received data from request as json
         self.data = request.get_json()
         self.validator = UserValidator(data=self.data)
         self.user_query = UserQueries(data=self.data)

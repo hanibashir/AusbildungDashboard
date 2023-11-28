@@ -7,6 +7,11 @@ def message(model, status, field=None):
             return messages_list['user'][status][field]
         else:
             return messages_list['user'][status]
+    elif model == 'aus_page':
+        if field:
+            return messages_list['aus_page'][status][field]
+        else:
+            return messages_list['aus_page'][status]
 
 
 # messages dict
@@ -37,6 +42,14 @@ messages_list = {
         Status.BAD_REQUEST: 'Something went wrong!'
     },
     'aus_page': {
-
+        'TITLE_NOT_VALID': '',
+        'EMPTY_FIELD': {
+            'title': 'Please enter ausbildung page title',
+            'duration': 'Please enter ausbildung duration',
+            'certificate': 'Please enter ausbildung certificate',
+            'content': 'Please enter ausbildung content',
+            'category_id': 'Please choose ausbildung category'
+        },
+        Status.CREATED: 'Ausbildung Page created successfully',
     }
 }

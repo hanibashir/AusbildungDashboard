@@ -12,21 +12,32 @@ class AusPageQueries(Queries):
         return self.aus_page.query.all()
 
     def insert_aus_page(self):
+        published_date = self.date_time.now()
+        updated_date = self.date_time.now()
 
-        image_url = self.data['image_url']
-        registered_date = self.date_time.now()
-        last_login = self.date_time.now()
         try:
-            new_user = User(
-                name=self.data['name'],
-                password=generate_password_hash(self.data['password']),
-                email=self.data['email'],
-                image_url=image_url,
-                registered_date=registered_date,
-                last_login=last_login
+            new_aus = AusPage(
+                title=self.data['title'],
+                duration=self.data['duration'],
+                certificate=self.data['certificate'],
+                content=self.data['content'],
+                category_id=self.data['category_id'],
+                user_id=self.data['user_id'],
+                published_date=published_date,
+                updated_date=updated_date,
+                image_url=self.data['image_url'] or None,
+                shift_type=self.data['shift_type'] or None,
+                first_year_salary=self.data['first_year_salary'] or 0,
+                second_year_salary=self.data['second_year_salary'] or 0,
+                third_year_salary=self.data['third_year_salary'] or 0,
+                fourth_year_salary=self.data['fourth_year_salary'] or 0,
+                best_paid=self.data['best_paid'] or False,
+                popular=self.data['popular'] or False,
+                links=self.data['links'] or None,
+                published=self.data['published'] or False
             )
             # insert into users table
-            self.insert(new_user)
-            return self.message('user', self.status.CREATED)
+            self.insert(new_aus)
+            return self.message('aus_page', self.status.CREATED)
         except self.sql_exception:
-            return self.message('user', self.status.BAD_REQUEST)
+            return self.message('aus_page', self.status.BAD_REQUEST)
