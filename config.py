@@ -5,5 +5,5 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # Disable Flask-SQLAlchemy modification tracking
 
     SECRET_KEY = 'secret_key'
-    DEBUG = False
+    DEBUG = True
 

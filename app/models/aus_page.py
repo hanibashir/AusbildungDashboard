@@ -54,6 +54,7 @@ class AusPage(db.Model):
 
     def to_dict(self):
         return {
+            "aus_page_id": self.AusPageID,
             "title": self.Title,
             "duration": self.Duration,
             "certificate": self.Certificate,

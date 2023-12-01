@@ -3,7 +3,7 @@ from flask_restful import Resource, Api
 from . import aus_page_blueprint
 from ...helpers.constants import Status
 from ...helpers.db.Aus_page_queries import AusPageQueries
-from ...helpers.to_json import rows_to_json, message_to_json
+from ...helpers.to_json import row_to_json, message_to_json, rows_to_json
 from ...helpers.validation.aus_page_validator import AusPageValidator
 
 api = Api(aus_page_blueprint)
@@ -14,7 +14,7 @@ class AusPageListResource(Resource):
         self.user_query = AusPageQueries()
 
     def get(self):
-        # get all users and convert response to json
+        # get all aus pages and convert response to json
         return rows_to_json(self.user_query.select_all())
 
 
@@ -56,7 +56,9 @@ class AusPageResource(Resource):
         return message_to_json(msg=msg, status=Status.CREATED.value)  # Return a 201 Created status code
 
     def get(self, page_id):
-        pass
+        aus_page = self.aus_page_query.select_aus_page(page_id)
+        if aus_page:
+            return row_to_json(row=aus_page)
 
     def put(self, page_id):
         pass
@@ -66,6 +68,6 @@ class AusPageResource(Resource):
 
 
 # Aus_page routes
-api.add_resource(AusPageResource, '/aus_page/<int:page_id>', endpoint='/aus_page/<int:page_id>')
+api.add_resource(AusPageResource, '/aus_pages/<int:page_id>', endpoint='/aus_pages/<int:page_id>')
 api.add_resource(AusPageResource, '/aus_pages/create', endpoint='/aus_pages/create')
 api.add_resource(AusPageListResource, '/aus_pages', endpoint='/aus_pages')

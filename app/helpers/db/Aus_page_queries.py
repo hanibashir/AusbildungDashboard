@@ -41,3 +41,6 @@ class AusPageQueries(Queries):
             return self.message('aus_page', self.status.CREATED)
         except self.sql_exception:
             return self.message('aus_page', self.status.BAD_REQUEST)
+
+    def select_aus_page(self, page_id):
+        return self.aus_page.query.get(page_id)
