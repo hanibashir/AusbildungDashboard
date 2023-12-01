@@ -52,5 +52,9 @@ messages_list = {
         },
         Status.CREATED: 'Ausbildung Page created successfully',
         Status.NOT_FOUND: 'Page not found',
+        Status.OK: {
+            'updated': 'Page updated successfully',
+            'deleted': 'Page deleted successfully'
+        },
     }
 }

@@ -48,14 +48,14 @@ class UserQueries(Queries):
 
     def update_user(self, user):
         # name, password, confirm_password, email, image_url, registered_date, last_login
-        image_url = self.data['image_url']
+        user_img = self.data['image_url']
         registered_date = user.RegisteredDate
         last_login = user.LastLogin
         try:
             user.Name = self.data['name']
             user.Password = generate_password_hash(self.data['password'])
             user.Email = self.data['email']
-            user.ImageUrl = image_url
+            user.ImageUrl = user_img
             user.RegisteredDate = registered_date
             user.LastLogin = last_login
 

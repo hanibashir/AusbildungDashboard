@@ -6,6 +6,7 @@ from ...helpers.db.Aus_page_queries import AusPageQueries
 from ...helpers.messages import message
 from ...helpers.to_json import row_to_json, message_to_json, rows_to_json
 from ...helpers.validation.aus_page_validator import AusPageValidator
+from ...models.aus_page import AusPage
 
 api = Api(aus_page_blueprint)
 
@@ -24,6 +25,7 @@ class AusPageResource(Resource):
         self.data = request.get_json()
         self.validator = AusPageValidator(data=self.data)
         self.aus_page_query = AusPageQueries(data=self.data)
+
     """
         {
             "title": "متخصص في تكنولوجيا المعلومات",
@@ -47,27 +49,53 @@ class AusPageResource(Resource):
 
     def post(self):
         # Receive and validate aus page data
-        validated, msg = self.validator.validate_aus_page_input()
+        validated, validate_msg = self.validator.validate_aus_page_input()
 
         if not validated:
-            return message_to_json(msg, Status.BAD_REQUEST.value)  # Return a 400 Bad Request status code
+            return message_to_json(validate_msg, Status.BAD_REQUEST.value)  # Return a 400 Bad Request status code
 
         # insert new ausbildung page
-        msg = self.aus_page_query.insert_aus_page()
-        return message_to_json(msg=msg, status=Status.CREATED.value)  # Return a 201 Created status code
+        insert_msg = self.aus_page_query.insert_aus_page()
+        return message_to_json(msg=insert_msg, status=Status.CREATED.value)  # Return a 201 Created status code
 
     def get(self, page_id):
         aus_page = self.aus_page_query.select_aus_page(page_id)
         if not aus_page:
-            msg = message(model='aus_page', status=Status.NOT_FOUND)
-            return message_to_json(msg=msg, status=Status.NOT_FOUND.value)  # Return a 404 Not Found status code
+            get_msg = message(model='aus_page', status=Status.NOT_FOUND)
+            return message_to_json(msg=get_msg, status=Status.NOT_FOUND.value)  # Return a 404 Not Found status code
         return row_to_json(row=aus_page)
 
     def put(self, page_id):
-        pass
+        aus_page = self.aus_page_query.select_aus_page(page_id)
+        if not aus_page:
+            msg = message(model='aus_page', status=Status.NOT_FOUND)
+            return message_to_json(msg=msg, status=Status.NOT_FOUND.value)  # Return a 404 Not Found status code
+
+        # Receive and validate aus page data
+        validated, msg = self.validator.validate_aus_page_input()
+        if not validated:
+            return message_to_json(msg, Status.BAD_REQUEST.value)  # Return a 400 Bad Request status code
+
+        update_msg = self.aus_page_query.update_aus_page(aus_page)
+
+        return message_to_json(msg=update_msg, status=Status.UPDATED.value)  # Return a 204 Updated status code
 
     def delete(self, page_id):
-        pass
+        # Retrieve a aus page by ID
+        aus_page: AusPage = self.aus_page_query.select_aus_page(page_id)
+
+        if not aus_page:
+            not_found_msg = message(model='aus_page', status=Status.NOT_FOUND)
+            return message_to_json(
+                msg=not_found_msg,
+                status=Status.NOT_FOUND.value
+            )  # Return a 404 Not Found status code
+
+        deleted, delete_msg = self.aus_page_query.delete_aus_page(aus_page.AusPageID)
+        if deleted:
+            return message_to_json(msg=delete_msg, status=Status.DELETED.value)  # Return a 204 Deleted status code
+        else:
+            return message_to_json(msg=delete_msg, status=Status.BAD_REQUEST.value)
 
 
 # Aus_page routes
