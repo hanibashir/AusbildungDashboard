@@ -1,4 +1,4 @@
-from ..helpers.constants import Status
+from ..utils.constants import Status
 
 
 def message(model, status, field=None):

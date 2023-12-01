@@ -31,4 +31,10 @@ class User(db.Model):
         }
 
     def __repr__(self):
-        return f"<User(UserID={self.UserID}, Name={self.Name})>"
+        return (f""
+                f"<User(UserID={self.UserID}, "
+                f"Name={self.Name}, "
+                f"Email={self.Email},"
+                f"Image={self.ImageUrl},"
+                f"Reg.Date={self.RegisteredDate},"
+                f"LastLogin={self.LastLogin})>")

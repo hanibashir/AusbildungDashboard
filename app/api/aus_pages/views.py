@@ -1,11 +1,11 @@
 from flask import request
 from flask_restful import Resource, Api
 from . import aus_page_blueprint
-from ...helpers.constants import Status
-from ...helpers.db.Aus_page_queries import AusPageQueries
-from ...helpers.messages import message
-from ...helpers.to_json import row_to_json, message_to_json, rows_to_json
-from ...helpers.validation.aus_page_validator import AusPageValidator
+from ...utils.constants import Status
+from ...utils.db.Aus_page_queries import AusPageQueries
+from ...utils.messages import message
+from ...utils.to_json import row_to_json, message_to_json, rows_to_json
+from ...utils.validation.aus_page_validator import AusPageValidator
 from ...models.aus_page import AusPage
 
 api = Api(aus_page_blueprint)
@@ -59,7 +59,7 @@ class AusPageResource(Resource):
         return message_to_json(msg=insert_msg, status=Status.CREATED.value)  # Return a 201 Created status code
 
     def get(self, page_id):
-        aus_page = self.aus_page_query.select_aus_page(page_id)
+        aus_page: AusPage = self.aus_page_query.select_aus_page(page_id)
         if not aus_page:
             get_msg = message(model='aus_page', status=Status.NOT_FOUND)
             return message_to_json(msg=get_msg, status=Status.NOT_FOUND.value)  # Return a 404 Not Found status code

@@ -1,5 +1,5 @@
 from app import db
-from app.helpers.messages import Status, message
+from app.utils.messages import Status, message
 from datetime import datetime
 from sqlalchemy import exc
 

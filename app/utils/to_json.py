@@ -2,6 +2,7 @@ from flask import jsonify
 
 
 def row_to_json(row):
+    print(row.to_dict())
     return jsonify(row.to_dict())
 
 

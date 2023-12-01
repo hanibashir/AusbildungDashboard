@@ -1,4 +1,4 @@
-from app.helpers.db.Queries import Queries
+from app.utils.db.Queries import Queries
 from app.models.user import User
 from werkzeug.security import generate_password_hash
 

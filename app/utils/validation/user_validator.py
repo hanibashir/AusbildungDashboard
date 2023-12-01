@@ -1,4 +1,4 @@
-from app.helpers.messages import message
+from app.utils.messages import message
 import re
 
 

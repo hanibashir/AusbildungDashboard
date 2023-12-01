@@ -1,10 +1,11 @@
 from flask import request
 from flask_restful import Resource, Api
 from . import user_blueprint
-from ...helpers.db.user_queries import UserQueries
-from app.helpers.validation.user_validator import UserValidator
-from ...helpers.messages import message, Status
-from ...helpers.to_json import message_to_json, row_to_json, rows_to_json
+from ...models.user import User
+from ...utils.db.user_queries import UserQueries
+from app.utils.validation.user_validator import UserValidator
+from ...utils.messages import message, Status
+from ...utils.to_json import message_to_json, row_to_json, rows_to_json
 
 api = Api(user_blueprint)
 
@@ -46,7 +47,7 @@ class UserResource(Resource):
     def get(self, user_id):
         if user_id:
             # Retrieve a user by ID
-            user = self.user_query.select_user(user_id=user_id)
+            user: User = self.user_query.select_user(user_id=user_id)
 
             if not user:
                 not_found_msg = message(model='user', status=Status.NOT_FOUND)
