@@ -3,6 +3,7 @@ from flask_restful import Resource, Api
 from . import aus_page_blueprint
 from ...helpers.constants import Status
 from ...helpers.db.Aus_page_queries import AusPageQueries
+from ...helpers.messages import message
 from ...helpers.to_json import row_to_json, message_to_json, rows_to_json
 from ...helpers.validation.aus_page_validator import AusPageValidator
 
@@ -57,8 +58,10 @@ class AusPageResource(Resource):
 
     def get(self, page_id):
         aus_page = self.aus_page_query.select_aus_page(page_id)
-        if aus_page:
-            return row_to_json(row=aus_page)
+        if not aus_page:
+            msg = message(model='aus_page', status=Status.NOT_FOUND)
+            return message_to_json(msg=msg, status=Status.NOT_FOUND.value)  # Return a 404 Not Found status code
+        return row_to_json(row=aus_page)
 
     def put(self, page_id):
         pass

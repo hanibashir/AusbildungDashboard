@@ -51,5 +51,6 @@ messages_list = {
             'category_id': 'Please choose ausbildung category'
         },
         Status.CREATED: 'Ausbildung Page created successfully',
+        Status.NOT_FOUND: 'Page not found',
     }
 }
