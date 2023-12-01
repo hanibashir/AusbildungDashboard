@@ -60,7 +60,7 @@ class AusPage(db.Model):
             "content": self.Content,
             "category_id": self.CategoryID,
             "user_id": self.UserID,
-            "shift_type": "دوام متغير",
+            "shift_type": self.ShiftType,
             "first_year_salary": self.FirstYearSalary,
             "second_year_salary": self.SecondYearSalary,
             "third_year_salary": self.ThirdYearSalary,

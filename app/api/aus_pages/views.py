@@ -25,7 +25,7 @@ class AusPageResource(Resource):
         self.aus_page_query = AusPageQueries(data=self.data)
     """
         {
-            "title": "Fachinformatiker",
+            "title": "متخصص في تكنولوجيا المعلومات",
             "duration": "ثلاث سنوات ونصف",
             "certificate": "الثانوية",
             "content":"إنها سلسلة من الكلمات اللاتينية التي ، عند وضعها في موضعها ، لا تشكل جملًا بمعنى كامل ، ولكنها تعطي الحياة لنص اختبار مفيد لملء الفراغات التي يتم شغلها لاحقًا من نصوص مخصصة كتبها متخصصون في الاتصال.",
