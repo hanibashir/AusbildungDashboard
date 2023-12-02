@@ -69,7 +69,7 @@ def test_to_dict_method():
 def test_repr_method():
     user = User(
         name='Alice',
-        password='alicepass',
+        password='alice@pass',
         email='alice@example.com',
         image_url='http://example.com/alice.jpg',
         registered_date=datetime.now(),
