@@ -12,6 +12,11 @@ def message(model, status, field=None):
             return messages_list['aus_page'][status][field]
         else:
             return messages_list['aus_page'][status]
+    elif model == 'category':
+        if field:
+            return messages_list['category'][status][field]
+        else:
+            return messages_list['category'][status]
 
 
 # messages dict
@@ -44,7 +49,7 @@ messages_list = {
     'aus_page': {
         'TITLE_NOT_VALID': '',
         'EMPTY_FIELD': {
-            'title': 'Please enter ausbildung page title',
+            'title': 'Please enter the ausbildung page title',
             'duration': 'Please enter ausbildung duration',
             'certificate': 'Please enter ausbildung certificate',
             'content': 'Please enter ausbildung content',
@@ -56,5 +61,12 @@ messages_list = {
             'updated': 'Page updated successfully',
             'deleted': 'Page deleted successfully'
         },
+    },
+    'category': {
+        'EMPTY_FIELD': {
+            'title': 'Please enter the category title'
+        },
+        Status.CONFLICT: 'This category already exists',
+        Status.CREATED: 'Category created successfully'
     }
 }

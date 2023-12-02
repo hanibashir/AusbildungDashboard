@@ -5,6 +5,11 @@ category_data = {
 }
 
 
-def test_get_all_users(client):
+def test_get_all_categories(client):
     response = client.get('/categories')
+    assert response.status_code == 200
+
+
+def test_create_category(client):
+    response = client.post('/categories/create', json=category_data)
     assert response.status_code == 200
