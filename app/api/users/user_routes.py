@@ -23,7 +23,8 @@ class UserListResource(Resource):
 class UserResource(Resource):
     def __init__(self):
         # received data from request as json
-        self.data = request.get_json()
+        if request.get_json():
+            self.data = request.get_json()
         self.validator = UserValidator(data=self.data)
         self.user_query = UserQueries(data=self.data)
 

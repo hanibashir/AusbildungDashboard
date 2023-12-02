@@ -1,3 +1,4 @@
+from app import db
 from app.utils.db.Queries import Queries
 from app.models.user import User
 from werkzeug.security import generate_password_hash
@@ -14,7 +15,7 @@ class UserQueries(Queries):
 
     def select_user(self, user_id=None, email=None):
         if user_id:
-            return self.user.query.get(user_id)
+            return db.session.get(self.user, user_id)
         if email:
             # Return the first result of this Query or None if the result doesn't contain any row.
             return self.user.query.filter_by(Email=email).first()

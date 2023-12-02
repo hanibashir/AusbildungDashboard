@@ -1,4 +1,3 @@
-
 user_data = {
     "name": "John Doe",
     "email": "john@example.com",
@@ -17,9 +16,11 @@ def test_create_user(client):
     response = client.post('/users/create', json=user_data)
     assert response.status_code == 200
 
-# def test_get_user_by_id(client):
-#     # Retrieve the user from the database
-#     retrieved_user = db.session.query(User).filter_by(Name=user_data['name']).first()
-#     assert retrieved_user is not None
+
+def test_get_user_by_id(client):
+    user_id = 1
+    response = client.get(f'/users/{user_id}', json=user_data)
+    assert response.status_code == 200
 
 # TODO: more test functions for other endpoints (e.g., update and delete)
+

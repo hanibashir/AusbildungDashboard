@@ -32,6 +32,7 @@ def create_app():
     from .models.category import Category
     from .models.role import Role
     from .models.user_role import UserRole
+
     with app.app_context():
         db.create_all()
 
