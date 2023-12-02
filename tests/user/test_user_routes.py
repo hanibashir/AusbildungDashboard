@@ -19,7 +19,7 @@ def test_create_user(client):
 
 def test_get_user_by_id(client):
     user_id = 1
-    response = client.get(f'/users/{user_id}', json=user_data)
+    response = client.get(f'/users/{user_id}')
     assert response.status_code == 200
 
 # TODO: more test functions for other endpoints (e.g., update and delete)

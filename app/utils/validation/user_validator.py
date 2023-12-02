@@ -9,13 +9,13 @@ class UserValidator:
             name, password, confirm_password, email, image_url, registered_date, last_login
     """
 
-    def __init__(self, data):
+    def __init__(self, data=None):
         self.__name = data['name']
         self.__email = data['email']
         self.__password = data['password']
         self.__confirm_password = data['c_password']
 
-    def validate_user_register_input(self) -> tuple[bool, str]:
+    def validate_user_input(self) -> tuple[bool, str]:
         # if the fields are empty
         if self.__name:
             if not self.validate_name():
