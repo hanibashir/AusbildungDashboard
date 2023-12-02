@@ -3,7 +3,7 @@ from flask_restful import Resource, Api
 from . import user_blueprint
 from ...models.user import User
 from ...utils.db.user_queries import UserQueries
-from app.utils.validation.user_validator import UserValidator
+from ...utils.validation.user_validator import UserValidator
 from ...utils.messages import message, Status
 from ...utils.to_json import message_to_json, row_to_json, rows_to_json
 

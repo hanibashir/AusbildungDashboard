@@ -2,7 +2,7 @@ from flask import request
 from flask_restful import Resource, Api
 from . import aus_page_blueprint
 from ...utils.constants import Status
-from ...utils.db.Aus_page_queries import AusPageQueries
+from ...utils.db.aus_page_queries import AusPageQueries
 from ...utils.messages import message
 from ...utils.to_json import row_to_json, message_to_json, rows_to_json
 from ...utils.validation.aus_page_validator import AusPageValidator
@@ -81,7 +81,7 @@ class AusPageResource(Resource):
         return message_to_json(msg=update_msg, status=Status.UPDATED.value)  # Return a 204 Updated status code
 
     def delete(self, page_id):
-        # Retrieve a aus page by ID
+        # Retrieve aus page by ID
         aus_page: AusPage = self.aus_page_query.select_aus_page(page_id)
 
         if not aus_page:

@@ -1,7 +1,3 @@
-import os
-import tempfile
-import pytest
-from app import create_app
 
 user_data = {
     "name": "John Doe",
@@ -12,22 +8,6 @@ user_data = {
 }
 
 
-@pytest.fixture
-def app():
-    return create_app()
-
-
-@pytest.fixture
-def client(app):
-    app.config['TESTING'] = True
-    db_fd, app.config['DATABASE'] = tempfile.mkstemp()
-    with app.test_client() as client:
-        yield client
-
-    os.close(db_fd)
-    os.unlink(app.config['DATABASE'])
-
-
 def test_get_all_users(client):
     response = client.get('/users')
     assert response.status_code == 200
@@ -36,7 +16,6 @@ def test_get_all_users(client):
 def test_create_user(client):
     response = client.post('/users/create', json=user_data)
     assert response.status_code == 200
-
 
 # def test_get_user_by_id(client):
 #     # Retrieve the user from the database

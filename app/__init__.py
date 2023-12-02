@@ -19,9 +19,11 @@ def create_app():
     # Import blueprints
     from .api.users import user_blueprint
     from .api.aus_pages import aus_page_blueprint
+    from .api.categories import category_blueprint
     # Register blueprints
     app.register_blueprint(user_blueprint)
     app.register_blueprint(aus_page_blueprint)
+    app.register_blueprint(category_blueprint)
 
     # create db tables
     from .models.user import User

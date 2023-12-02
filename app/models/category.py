@@ -14,5 +14,13 @@ class Category(db.Model):
         self.Description = description
         self.ImageUrl = image_url
 
+    def to_dict(self):
+        return {
+            "Category_id": self.CategoryID,
+            "title": self.Title,
+            "description": self.Description,
+            "image_url": self.ImageUrl
+        }
+
     def __repr__(self):
         return f"<Category(CategoryID={self.CategoryID}, Title={self.Title})>"
