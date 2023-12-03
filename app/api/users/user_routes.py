@@ -84,12 +84,6 @@ class UserResource(Resource):
         if not validated:
             return message_to_json(validate_msg, Status.BAD_REQUEST.value)  # Return a 400 Bad Request status code
 
-        # Check if the email already exists in the database
-        email_exists, check_email_msg = self.queries.check_email_exists()
-        if email_exists:
-            return message_to_json(msg=check_email_msg,
-                                   status=Status.CONFLICT.value)  # Return a 409 Conflict status code
-
         update_msg = self.queries.update_user(user)
 
         return message_to_json(msg=update_msg, status=Status.UPDATED.value)  # Return a 204 Updated status code
