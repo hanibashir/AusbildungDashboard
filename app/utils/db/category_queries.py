@@ -1,3 +1,4 @@
+from app import db
 from app.models.category import Category
 from app.utils.db.Queries import Queries
 
@@ -13,7 +14,7 @@ class CategoryQueries(Queries):
 
     def select_category(self, category_id=None, title=None):
         if category_id:
-            return self.category.query.get(category_id)
+            return db.session.get(self.category, category_id)
         if title:
             # Return the first result of this Query or None if the result doesn't contain any row.
             return self.category.query.filter_by(Title=title).first()

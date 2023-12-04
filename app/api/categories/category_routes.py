@@ -1,9 +1,11 @@
-from flask import request
+from flask import request, make_response
 from flask_restful import Resource, Api
 from . import category_blueprint
-from ...utils.constants import Status
+from ...models.category import Category
+from ...utils.constants import Status, api_routes_urls
 from ...utils.db.category_queries import CategoryQueries
-from ...utils.to_json import rows_to_json, message_to_json
+from ...utils.messages import message
+from ...utils.to_json import rows_to_json, message_to_json, row_to_json
 from ...utils.validation.category_validator import CategoryValidator
 
 api = Api(category_blueprint)
@@ -16,34 +18,77 @@ class CategoryListResource(Resource):
 
     def get(self):
         # get all categories and convert response to json
-        return rows_to_json(self.category_query.select_all())
+        return make_response(rows_to_json(self.category_query.select_all()), Status.OK.value)
 
 
 class CategoryResource(Resource):
     def __init__(self):
-        self.data = request.get_json()
-        self.validator = CategoryValidator(data=self.data)
-        self.category_query = CategoryQueries(data=self.data)
+        self.queries = None
+        self.data = None
+        self.validator = None
 
     def post(self):
+        if request.get_json():
+            self.data = request.get_json()
+            self.validator = CategoryValidator(data=self.data)
+            self.queries = CategoryQueries(data=self.data)
         # Receive and validate category input data
         validated, validate_msg = self.validator.validate_category_input()
 
         if not validated:
-            return message_to_json(validate_msg, Status.BAD_REQUEST.value)  # Return a 400 Bad Request status code
+            return make_response(
+                message_to_json(validate_msg, Status.BAD_REQUEST.value),
+                Status.BAD_REQUEST.value
+            )  # Return a 400 Bad Request status code
 
         # Check if the email already exists in the database
-        cat_exists, check_cat_msg = self.category_query.check_category_exists()
+        cat_exists, check_cat_msg = self.queries.check_category_exists()
         if cat_exists:
-            return message_to_json(msg=check_cat_msg,
-                                   status=Status.CONFLICT.value)  # Return a 409 Conflict status code
+            return make_response(
+                message_to_json(msg=check_cat_msg, status=Status.CONFLICT.value),
+                Status.CONFLICT.value
+            )  # Return a 409 Conflict status code
 
         # insert new user
-        insert_msg = self.category_query.insert_category()
-        return message_to_json(msg=insert_msg, status=Status.CREATED.value)  # Return a 201 Created status code
+        insert_msg = self.queries.insert_category()
+        return make_response(
+            message_to_json(msg=insert_msg, status=Status.CREATED.value),
+            Status.CREATED.value
+        )  # Return a 201 Created status code
+
+    def get(self, category_id):
+        if category_id:
+            self.queries = CategoryQueries()
+            # Retrieve a Category by ID
+            category: Category = self.queries.select_category(category_id=category_id)
+
+            if not category:
+                not_found_msg = message(model='category', status=Status.NOT_FOUND)
+
+                return make_response(message_to_json(msg=not_found_msg,
+                                                     status=Status.NOT_FOUND.value), Status.NOT_FOUND.value)  # 404
+
+                # return Response(json_msg, status=Status.NOT_FOUND.value, mimetype='application/json')
+
+            # return user data in a JSON response
+            # name, password, confirm_password, email, image_url, registered_date, last_login
+            return make_response(row_to_json(category), Status.OK.value)
 
 
-# User routes
-# api.add_resource(CategoryResource, '/categories/<int:cat_id>', endpoint='/categories/<int:user_id>')
-api.add_resource(CategoryResource, '/categories/create', endpoint='/categories/create')
-api.add_resource(CategoryListResource, '/categories', endpoint='/categories')
+# Category routes
+api.add_resource(
+    CategoryResource,
+    api_routes_urls['category']['create_category'],
+    endpoint=api_routes_urls['category']['create_category']
+)
+api.add_resource(
+    CategoryResource,
+    api_routes_urls['category']['get_single_category'],
+    endpoint=api_routes_urls['category']['get_single_category']
+)
+
+api.add_resource(
+    CategoryListResource,
+    api_routes_urls['category']['get_categories_list'],
+    endpoint=api_routes_urls['category']['get_categories_list']
+)

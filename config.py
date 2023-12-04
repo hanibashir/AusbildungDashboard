@@ -1,8 +1,8 @@
 class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # Disable Flask-SQLAlchemy modification tracking
-
     SECRET_KEY = 'secret_key'
-    DEBUG = True
+    # ENV = 'testing'
+    ENV = 'development'
 
 
 class DevelopmentConfig(Config):
@@ -12,6 +12,10 @@ class DevelopmentConfig(Config):
 
 
 class TestingConfig(Config):
-    TESTING = True
-    # fake database URL
+    DEBUG = True
+    # Temporary database URL
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+
+
+class ProductionConfig:
+    pass

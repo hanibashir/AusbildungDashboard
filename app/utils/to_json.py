@@ -2,7 +2,6 @@ from flask import jsonify
 
 
 def row_to_json(row):
-    print(row.to_dict())
     return jsonify(row.to_dict())
 
 
@@ -19,16 +18,10 @@ def message_to_json(msg, status):
         }
     )
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+# def message_to_json(msg, status):
+#     return jsonify(
+#         {
+#             "message": msg,
+#             "status": status
+#         }
+#     )

@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from config import Config
+from config import Config, TestingConfig, DevelopmentConfig, ProductionConfig
 
 # init SQLAlchemy
 db = SQLAlchemy()
@@ -10,7 +10,22 @@ db = SQLAlchemy()
 def create_app():
     # create and configure the app
     app = Flask(__name__)
-    app.config.from_object(Config)
+    # app.config.from_object(Config)
+
+    # Use the appropriate configuration based on the environment
+    if app.config['TESTING']:
+        app.config.from_object(TestingConfig)
+    else:
+        app.config.from_object(DevelopmentConfig)
+
+    app.config['TESTING'] = False
+
+    # if app.config['ENV'] == 'testing':
+    #     app.config.from_object(TestingConfig)
+    # elif app.config['ENV'] == 'development':
+    #     app.config.from_object(DevelopmentConfig)
+    # else:
+    #     app.config.from_object(ProductionConfig)
 
     # Initialize database connection with the app
     db.init_app(app)
