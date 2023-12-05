@@ -1,7 +1,7 @@
 from flask import request, make_response
 from flask_restful import Resource, Api
 from . import aus_page_blueprint
-from ...utils.constants import Status, api_routes_urls
+from ...utils.constants import api_routes_urls, BAD_REQUEST, CREATED, NOT_FOUND, OK, UPDATED
 from ...utils.db.aus_page_queries import AusPageQueries
 from ...utils.messages import message
 from ...utils.to_json import row_to_json, message_to_json, rows_to_json
@@ -19,7 +19,7 @@ class AusPageListResource(Resource):
         # get all aus pages and convert response to json
         return make_response(
             rows_to_json(self.user_query.select_all()),
-            Status.OK.value
+            OK
         )
 
 
@@ -34,77 +34,49 @@ class AusPageResource(Resource):
         validated, validate_msg = self.validator.validate_aus_page_input()
 
         if not validated:
-            return make_response(
-                message_to_json(validate_msg, Status.BAD_REQUEST.value),
-                Status.BAD_REQUEST.value
-            )  # Return a 400 Bad Request status code
+            return make_response(message_to_json(validate_msg, BAD_REQUEST), BAD_REQUEST)  # 400 Bad Request
 
         # insert new ausbildung page
         insert_msg = self.aus_page_query.insert_aus_page()
-        return make_response(
-            message_to_json(msg=insert_msg, status=Status.CREATED.value),
-            Status.CREATED.value
-        )  # Return a 201 Created status code
+        return make_response(message_to_json(msg=insert_msg, status=CREATED), CREATED)  # 201 Created status code
 
     def get(self, page_id):
         aus_page: AusPage = self.aus_page_query.select_aus_page(page_id)
         if not aus_page:
-            get_msg = message(model='aus_page', status=Status.NOT_FOUND)
-            return make_response(
-                message_to_json(msg=get_msg, status=Status.NOT_FOUND.value),
-                Status.NOT_FOUND.value
-            )  # Return a 404 Not Found status code
-        return make_response(
-            row_to_json(row=aus_page),
-            Status.OK.value
-        )
+            get_msg = message(model='aus_page', status=NOT_FOUND)
+            return make_response(message_to_json(msg=get_msg, status=NOT_FOUND), NOT_FOUND)  # 404
+        return make_response(row_to_json(row=aus_page), OK)
 
     def put(self, page_id):
         aus_page = self.aus_page_query.select_aus_page(page_id)
         if not aus_page:
-            msg = message(model='aus_page', status=Status.NOT_FOUND)
-            return make_response(
-                message_to_json(msg=msg, status=Status.NOT_FOUND.value),
-                Status.NOT_FOUND.value
-            )  # Return a 404 Not Found status code
+            msg = message(model='aus_page', status=NOT_FOUND)
+            return make_response(message_to_json(msg=msg, status=NOT_FOUND), NOT_FOUND)  # 404
 
         # Receive and validate aus page data
         validated, msg = self.validator.validate_aus_page_input()
         if not validated:
-            return make_response(
-                message_to_json(msg, Status.BAD_REQUEST.value),
-                Status.BAD_REQUEST.value
-            )  # Return a 400 Bad Request status code
+            return make_response(message_to_json(msg, BAD_REQUEST), BAD_REQUEST)  # 400 Bad Request
 
         update_msg = self.aus_page_query.update_aus_page(aus_page)
 
-        return make_response(
-            message_to_json(msg=update_msg, status=Status.UPDATED.value),
-            Status.UPDATED.value
-        )  # Return a 204 Updated status code
+        return make_response(message_to_json(msg=update_msg, status=UPDATED), UPDATED)
 
     def delete(self, page_id):
         # Retrieve aus page by ID
         aus_page: AusPage = self.aus_page_query.select_aus_page(page_id)
 
         if not aus_page:
-            not_found_msg = message(model='aus_page', status=Status.NOT_FOUND)
-            return make_response(
-                message_to_json(msg=not_found_msg, status=Status.NOT_FOUND.value),
-                Status.NOT_FOUND.value
-            )  # Return a 404 Not Found status code
+            not_found_msg = message(model='aus_page', status=NOT_FOUND)
+            return make_response(message_to_json(msg=not_found_msg, status=NOT_FOUND), NOT_FOUND)
 
         deleted, delete_msg = self.aus_page_query.delete_aus_page(aus_page.AusPageID)
         if deleted:
             return make_response(
-                message_to_json(msg=delete_msg, status=Status.DELETED.value),
-                Status.DELETED.value
-            )  # Return a 204 Deleted status code
+                message_to_json(msg=delete_msg, status='DELETED'), 204)  # 204 Deleted status code
         else:
             return make_response(
-                message_to_json(msg=delete_msg, status=Status.BAD_REQUEST.value),
-                Status.BAD_REQUEST.value
-            )  # Return a 400 Bad Request status code# Return a 400 Bad Request status code
+                message_to_json(msg=delete_msg, status=BAD_REQUEST),  BAD_REQUEST)
 
 
 # Aus_page routes

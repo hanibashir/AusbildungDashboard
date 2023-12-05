@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from config import Config, TestingConfig, DevelopmentConfig, ProductionConfig
+from config import Config
+import os
 
 # init SQLAlchemy
 db = SQLAlchemy()
@@ -10,15 +11,14 @@ db = SQLAlchemy()
 def create_app():
     # create and configure the app
     app = Flask(__name__)
-    # app.config.from_object(Config)
+    app.config.from_object(Config)
 
     # Use the appropriate configuration based on the environment
-    if app.config['TESTING']:
-        app.config.from_object(TestingConfig)
-    else:
-        app.config.from_object(DevelopmentConfig)
 
-    app.config['TESTING'] = False
+    # if os.environ.get('PYTEST_RUNNING', '') == 'true':
+    #     app.config.from_object(TestingConfig)
+    # else:
+    #     app.config.from_object(DevelopmentConfig)
 
     # if app.config['ENV'] == 'testing':
     #     app.config.from_object(TestingConfig)

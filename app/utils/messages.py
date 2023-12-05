@@ -1,4 +1,4 @@
-from ..utils.constants import Status
+from app.utils.constants import CREATED, OK, UPDATED, CONFLICT, NOT_FOUND, BAD_REQUEST
 
 
 def message(model, status, field=None):
@@ -19,16 +19,14 @@ def message(model, status, field=None):
             return messages_list['category'][status]
 
 
-# messages dict
 messages_list = {
     'user': {
         # new user created
-        Status.CREATED: 'User created successfully',
+        CREATED: 'User created successfully',
         # user successfully logged in
-        Status.OK: {
-            'updated': 'User updated successfully',
-            'deleted': 'User deleted successfully'
-        },
+        OK: '',
+        UPDATED: 'User updated successfully',
+        'DELETED': 'User deleted successfully',
         'EMPTY_FIELD': {
             'name': 'Please enter your name',
             'email': 'Please enter your email',
@@ -41,10 +39,10 @@ messages_list = {
         'PASS_FORMAT': 'Passwords must be between 8 and 16 characters and must contain at least one uppercase letter, '
                        'one lowercase letter, and one digit',
         'EMAIL_NOT_VALID': 'Email not valid',
-        Status.CONFLICT: 'This email already exists. Please change it or login',
-        Status.NOT_FOUND: 'User not found',
+        CONFLICT: 'This email already exists. Please change it or login',
+        NOT_FOUND: 'User not found',
         # something wrong with the input fields
-        Status.BAD_REQUEST: 'Something went wrong!'
+        BAD_REQUEST: 'Something went wrong!'
     },
     'aus_page': {
         'TITLE_NOT_VALID': '',
@@ -55,18 +53,21 @@ messages_list = {
             'content': 'Please enter ausbildung content',
             'category_id': 'Please choose ausbildung category'
         },
-        Status.CREATED: 'Ausbildung Page created successfully',
-        Status.NOT_FOUND: 'Page not found',
-        Status.OK: {
-            'updated': 'Page updated successfully',
-            'deleted': 'Page deleted successfully'
-        },
+        CREATED: 'Ausbildung Page created successfully',
+        NOT_FOUND: 'Page not found',
+        OK: '',
+        UPDATED: 'Page updated successfully',
+        'DELETED': 'Page deleted successfully',
     },
     'category': {
         'EMPTY_FIELD': {
             'title': 'Please enter the category title'
         },
-        Status.CONFLICT: 'This category already exists',
-        Status.CREATED: 'Category created successfully'
+        CONFLICT: 'This category already exists',
+        CREATED: 'Category created successfully',
+        NOT_FOUND: 'Category not found',
+        OK: '',
+        UPDATED: 'Category updated successfully',
+        'DELETED': 'Category deleted successfully',
     }
 }

@@ -1,5 +1,5 @@
 from app import db
-from app.utils.messages import Status, message
+from app.utils.messages import message
 from datetime import datetime
 from sqlalchemy import exc
 
@@ -7,7 +7,6 @@ from sqlalchemy import exc
 class Queries:
     def __init__(self):
         self.db = db
-        self.status = Status
         self.message = message
         self.date_time = datetime
         self.sql_exception = exc.SQLAlchemyError

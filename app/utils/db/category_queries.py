@@ -1,5 +1,6 @@
 from app import db
 from app.models.category import Category
+from app.utils.constants import CONFLICT, CREATED, BAD_REQUEST
 from app.utils.db.Queries import Queries
 
 
@@ -22,7 +23,7 @@ class CategoryQueries(Queries):
     def check_category_exists(self) -> tuple[bool, str]:
         cat_exists = self.select_category(title=self.data['title'])
         if cat_exists:
-            return True, self.message(model='category', status=self.status.CONFLICT)
+            return True, self.message(model='category', status=CONFLICT)
         else:
             return False, ''
 
@@ -36,6 +37,6 @@ class CategoryQueries(Queries):
             )
             # insert into categories table
             self.insert(new_cat)
-            return self.message('category', self.status.CREATED)
+            return self.message('category', CREATED)
         except self.sql_exception:
-            return self.message('category', self.status.BAD_REQUEST)
+            return self.message('category', BAD_REQUEST)

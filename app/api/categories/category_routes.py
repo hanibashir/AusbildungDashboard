@@ -2,7 +2,7 @@ from flask import request, make_response
 from flask_restful import Resource, Api
 from . import category_blueprint
 from ...models.category import Category
-from ...utils.constants import Status, api_routes_urls
+from ...utils.constants import api_routes_urls, OK, BAD_REQUEST, CONFLICT, CREATED, NOT_FOUND
 from ...utils.db.category_queries import CategoryQueries
 from ...utils.messages import message
 from ...utils.to_json import rows_to_json, message_to_json, row_to_json
@@ -18,7 +18,7 @@ class CategoryListResource(Resource):
 
     def get(self):
         # get all categories and convert response to json
-        return make_response(rows_to_json(self.category_query.select_all()), Status.OK.value)
+        return make_response(rows_to_json(self.category_query.select_all()), OK)
 
 
 class CategoryResource(Resource):
@@ -36,25 +36,16 @@ class CategoryResource(Resource):
         validated, validate_msg = self.validator.validate_category_input()
 
         if not validated:
-            return make_response(
-                message_to_json(validate_msg, Status.BAD_REQUEST.value),
-                Status.BAD_REQUEST.value
-            )  # Return a 400 Bad Request status code
+            return make_response(message_to_json(validate_msg, BAD_REQUEST), BAD_REQUEST)
 
         # Check if the email already exists in the database
         cat_exists, check_cat_msg = self.queries.check_category_exists()
         if cat_exists:
-            return make_response(
-                message_to_json(msg=check_cat_msg, status=Status.CONFLICT.value),
-                Status.CONFLICT.value
-            )  # Return a 409 Conflict status code
+            return make_response(message_to_json(msg=check_cat_msg, status=CONFLICT), CONFLICT)
 
         # insert new user
         insert_msg = self.queries.insert_category()
-        return make_response(
-            message_to_json(msg=insert_msg, status=Status.CREATED.value),
-            Status.CREATED.value
-        )  # Return a 201 Created status code
+        return make_response(message_to_json(msg=insert_msg, status=CREATED), CREATED)
 
     def get(self, category_id):
         if category_id:
@@ -63,16 +54,15 @@ class CategoryResource(Resource):
             category: Category = self.queries.select_category(category_id=category_id)
 
             if not category:
-                not_found_msg = message(model='category', status=Status.NOT_FOUND)
+                not_found_msg = message(model='category', status=NOT_FOUND)
 
-                return make_response(message_to_json(msg=not_found_msg,
-                                                     status=Status.NOT_FOUND.value), Status.NOT_FOUND.value)  # 404
+                return make_response(message_to_json(msg=not_found_msg, status=NOT_FOUND), NOT_FOUND)
 
                 # return Response(json_msg, status=Status.NOT_FOUND.value, mimetype='application/json')
 
             # return user data in a JSON response
             # name, password, confirm_password, email, image_url, registered_date, last_login
-            return make_response(row_to_json(category), Status.OK.value)
+            return make_response(row_to_json(category), OK)  # 200 request ok
 
 
 # Category routes
