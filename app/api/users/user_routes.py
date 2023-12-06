@@ -65,43 +65,44 @@ class UserResource(Resource):
             return make_response(row_to_json(user), OK)
 
     def put(self, user_id):
-        # Retrieve a user by ID
-        if request.get_json():
-            self.data = request.get_json()
-            self.validator = UserValidator(data=self.data)
-            self.queries = UserQueries(data=self.data)
+        if user_id:
+            if request.get_json():
+                self.data = request.get_json()
+                self.validator = UserValidator(data=self.data)
+                self.queries = UserQueries(data=self.data)
 
-        # check user exists
-        user = self.queries.select_user(user_id)
+            # check user exists
+            user = self.queries.select_user(user_id)
 
-        if not user:
-            not_found_msg = message(model='user', status=NOT_FOUND)
-            return make_response(message_to_json(msg=not_found_msg, status=NOT_FOUND), NOT_FOUND)
+            if not user:
+                not_found_msg = message(model='user', status=NOT_FOUND)
+                return make_response(message_to_json(msg=not_found_msg, status=NOT_FOUND), NOT_FOUND)
 
-        # Receive and validate user registration data
-        validated, validate_msg = self.validator.validate_user_input()
+            # Receive and validate user registration data
+            validated, validate_msg = self.validator.validate_user_input()
 
-        if not validated:
-            return make_response(message_to_json(validate_msg, BAD_REQUEST), BAD_REQUEST)
+            if not validated:
+                return make_response(message_to_json(validate_msg, BAD_REQUEST), BAD_REQUEST)
 
-        update_msg = self.queries.update_user(user)
-        return make_response(message_to_json(update_msg, UPDATED), UPDATED)
+            update_msg = self.queries.update_user(user)
+            return make_response(message_to_json(update_msg, UPDATED), UPDATED)
 
     def delete(self, user_id):
-        self.queries = UserQueries()
-        # Retrieve a user by ID
-        user = self.queries.select_user(user_id)
+        if user_id:
+            self.queries = UserQueries()
+            # Retrieve a user by ID
+            user = self.queries.select_user(user_id)
 
-        if not user:
-            not_found_msg = message(model='user', status=NOT_FOUND)
-            return make_response(message_to_json(msg=not_found_msg, status=NOT_FOUND), NOT_FOUND)
+            if not user:
+                not_found_msg = message(model='user', status=NOT_FOUND)
+                return make_response(message_to_json(msg=not_found_msg, status=NOT_FOUND), NOT_FOUND)
 
-        deleted, delete_msg = self.queries.delete_user(user.UserID)
-        if deleted:
-            return make_response(
-                message_to_json(msg=delete_msg, status='DELETED'), 204)
-        else:
-            return make_response(message_to_json(msg=delete_msg, status=BAD_REQUEST), BAD_REQUEST)
+            deleted, delete_msg = self.queries.delete_user(user.UserID)
+            if deleted:
+                return make_response(
+                    message_to_json(msg=delete_msg, status='DELETED'), 204)
+            else:
+                return make_response(message_to_json(msg=delete_msg, status=BAD_REQUEST), BAD_REQUEST)
 
 
 # User routes

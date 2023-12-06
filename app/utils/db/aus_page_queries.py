@@ -1,3 +1,5 @@
+from app import db
+from app.utils.constants import CREATED, BAD_REQUEST, UPDATED
 from app.utils.db.Queries import Queries
 from app.models.aus_page import AusPage
 
@@ -38,18 +40,18 @@ class AusPageQueries(Queries):
             )
             # insert into users table
             self.insert(new_aus)
-            return self.message('aus_page', self.status.CREATED)
+            return self.message('aus_page', CREATED)
         except self.sql_exception:
-            return self.message('aus_page', self.status.BAD_REQUEST)
+            return self.message('aus_page', BAD_REQUEST)
 
     def select_aus_page(self, page_id):
-        return self.aus_page.query.get(page_id)
+        return db.session.get(self.aus_page, page_id)
+        # return self.aus_page.query.get(page_id)
 
     def update_aus_page(self, aus_page: AusPage):
         # title, duration, certificate, content, category_id, user_id, published_date, updated_date,
         # image_url = None, shift_type = None, first_year_salary = 0, second_year_salary = 0, third_year_salary = 0,
         # fourth_year_salary = 0, best_paid = False, popular = False, links = None, published = False
-        aus_page_img = self.data['image_url']
         published_date = aus_page.PublishedDate
         updated_date = self.date_time.now()
 
@@ -70,22 +72,22 @@ class AusPageQueries(Queries):
             aus_page.Popular = self.data['popular']
             aus_page.Links = self.data['links']
             aus_page.Published = self.data['published']
-            aus_page.ImageUrl = aus_page_img
+            aus_page.ImageUrl = self.data['image_url']
             aus_page.PublishedDate = published_date
             aus_page.UpdatedDate = updated_date
 
             # commit changes to db
             self.flush_and_commit()
 
-            return self.message('aus_page', self.status.OK, field='updated')
+            return self.message('aus_page', UPDATED)
         except self.sql_exception:
-            return self.message('aus_page', self.status.BAD_REQUEST)
+            return self.message('aus_page', BAD_REQUEST)
 
     def delete_aus_page(self, page_id) -> tuple[bool, str]:
         try:
             self.aus_page.query.filter(AusPage.AusPageID == page_id).delete()
             # commit changes to db
             self.flush_and_commit()
-            return True, self.message('aus_page', self.status.OK, field='deleted')
+            return True, self.message('aus_page', 204)
         except self.sql_exception:
-            return False, self.message('aus_page', self.status.BAD_REQUEST)
+            return False, self.message('aus_page', BAD_REQUEST)

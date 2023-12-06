@@ -15,7 +15,7 @@ api_routes_urls: dict = {
     },
     "aus_page": {
         "create_aus_page": "/aus_pages/create",
-        "get_single_aus_page": "/aus_pages/<int:category_id>",
+        "get_single_aus_page": "/aus_pages/<int:page_id>",
         "get_aus_pages_list": "/aus_pages"
     },
     "category": {

@@ -41,7 +41,6 @@ messages_list = {
         'EMAIL_NOT_VALID': 'Email not valid',
         CONFLICT: 'This email already exists. Please change it or login',
         NOT_FOUND: 'User not found',
-        # something wrong with the input fields
         BAD_REQUEST: 'Something went wrong!'
     },
     'aus_page': {
@@ -58,6 +57,7 @@ messages_list = {
         OK: '',
         UPDATED: 'Page updated successfully',
         'DELETED': 'Page deleted successfully',
+        BAD_REQUEST: 'Something went wrong!'
     },
     'category': {
         'EMPTY_FIELD': {
@@ -69,5 +69,6 @@ messages_list = {
         OK: '',
         UPDATED: 'Category updated successfully',
         'DELETED': 'Category deleted successfully',
+        BAD_REQUEST: 'Something went wrong!'
     }
 }
