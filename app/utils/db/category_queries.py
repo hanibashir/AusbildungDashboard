@@ -1,6 +1,6 @@
 from app import db
 from app.models.category import Category
-from app.utils.constants import CONFLICT, CREATED, BAD_REQUEST
+from app.utils.constants import CONFLICT, CREATED, BAD_REQUEST, UPDATED
 from app.utils.db.Queries import Queries
 
 
@@ -40,3 +40,26 @@ class CategoryQueries(Queries):
             return self.message('category', CREATED)
         except self.sql_exception:
             return self.message('category', BAD_REQUEST)
+
+    def update_category(self, category: Category):
+        # title, description, image_url
+        try:
+            category.Title = self.data['title']
+            category.Description = self.data['description']
+            category.ImageUrl = self.data['image_url']
+
+            # commit changes to db
+            self.flush_and_commit()
+
+            return self.message('category', UPDATED)
+        except self.sql_exception:
+            return self.message('category', BAD_REQUEST)
+
+    def delete_category(self, cat_id) -> tuple[bool, str]:
+        try:
+            self.category.query.filter(Category.CategoryID == cat_id).delete()
+            # commit changes to db
+            self.flush_and_commit()
+            return True, self.message('category', 'DELETED')
+        except self.sql_exception:
+            return False, self.message('category', BAD_REQUEST)
