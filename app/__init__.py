@@ -28,10 +28,12 @@ def create_app():
     from .api.users import user_blueprint
     from .api.aus_pages import aus_page_blueprint
     from .api.categories import category_blueprint
+    from .api.pages import page_blueprint
     # Register blueprints
     app.register_blueprint(user_blueprint)
     app.register_blueprint(aus_page_blueprint)
     app.register_blueprint(category_blueprint)
+    app.register_blueprint(page_blueprint)
 
     # create db tables
     from .models.user import User

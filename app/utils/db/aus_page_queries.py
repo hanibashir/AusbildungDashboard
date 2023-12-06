@@ -62,7 +62,6 @@ class AusPageQueries(Queries):
             aus_page.Content = self.data['content']
             aus_page.CategoryID = self.data['category_id']
             aus_page.UserID = self.data['user_id']
-            aus_page.content = self.data['content']
             aus_page.ShiftType = self.data['shift_type']
             aus_page.FirstYearSalary = self.data['first_year_salary']
             aus_page.SecondYearSalary = self.data['second_year_salary']

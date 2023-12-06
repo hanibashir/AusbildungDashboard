@@ -17,6 +17,11 @@ def message(model, status, field=None):
             return messages_list['category'][status][field]
         else:
             return messages_list['category'][status]
+    elif model == 'page':
+        if field:
+            return messages_list['page'][status][field]
+        else:
+            return messages_list['page'][status]
 
 
 messages_list = {
@@ -69,6 +74,20 @@ messages_list = {
         OK: '',
         UPDATED: 'Category updated successfully',
         'DELETED': 'Category deleted successfully',
+        BAD_REQUEST: 'Something went wrong!'
+    },
+    'page': {
+        'TITLE_NOT_VALID': '',
+        'EMPTY_FIELD': {
+            'title': 'Please enter the page title',
+            'content': 'Please enter page content',
+            'category_id': 'Please choose page category'
+        },
+        CREATED: 'Page created successfully',
+        NOT_FOUND: 'Page not found',
+        OK: '',
+        UPDATED: 'Page updated successfully',
+        'DELETED': 'Page deleted successfully',
         BAD_REQUEST: 'Something went wrong!'
     }
 }

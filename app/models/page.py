@@ -32,5 +32,17 @@ class Page(db.Model):
         self.UpdatedDate = updated_date
         self.Published = published
 
+    def to_dict(self):
+        return {
+            "page_id": self.PageID,
+            "title": self.Title,
+            "content": self.Content,
+            "category_id": self.CategoryID,
+            "user_id": self.UserID,
+            "image_url": "upload/images/users/user.png",
+            "links": self.Links,
+            "published": self.Published
+        }
+
     def __repr__(self):
         return f"<Page(PageID={self.PageID}, Title={self.Title})>"

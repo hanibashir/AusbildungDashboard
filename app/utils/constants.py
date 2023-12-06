@@ -23,4 +23,9 @@ api_routes_urls: dict = {
         "get_single_category": "/categories/<int:category_id>",
         "get_categories_list": "/categories"
     },
+    "page": {
+        "create_page": "/pages/create",
+        "get_single_page": "/pages/<int:page_id>",
+        "get_pages_list": "/pages"
+    },
 }
