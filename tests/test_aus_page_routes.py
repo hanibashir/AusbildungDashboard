@@ -4,7 +4,7 @@ from app.utils.constants import api_routes_urls, CREATED, OK, UPDATED, NOT_FOUND
 from tests import BaseTestCase
 
 
-class UserRoutesTestCase(BaseTestCase):
+class AusPageRoutesTestCase(BaseTestCase):
 
     def create_and_insert_fake_aus_page(self):
         published_date = datetime.now()
@@ -116,7 +116,7 @@ class UserRoutesTestCase(BaseTestCase):
             print(response.get_data(as_text=True))
 
             # Check if the aus_page in the fake database is updated
-            updated_aus_page = AusPage.query.get(fake_aus_page.UserID)
+            updated_aus_page = AusPage.query.get(fake_aus_page.AusPageID)
             self.assertIsNotNone(updated_aus_page)
             self.assertEqual(updated_aus_page.Duration, 'Three years and half')
             self.assertEqual(updated_aus_page.CategorID, 2)
