@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from config import Config, TestingConfig, DevelopmentConfig
 import os
@@ -22,6 +23,8 @@ def create_app():
 
     # Initialize database connection with the app
     db.init_app(app)
+    # migration
+    migrate = Migrate(app=app, db=db)
 
     # TODO: Import and register app blueprints
     # Import blueprints

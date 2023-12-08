@@ -1,7 +1,7 @@
 from app import db
 from app.models.category import Category
 from app.utils.constants import CONFLICT, CREATED, BAD_REQUEST, UPDATED
-from app.utils.db.Queries import Queries
+from app.utils.db.queries import Queries
 
 
 class CategoryQueries(Queries):

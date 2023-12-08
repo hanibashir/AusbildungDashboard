@@ -92,7 +92,7 @@ class PageResource(Resource):
                 return make_response(message_to_json(msg=delete_msg, status=BAD_REQUEST), BAD_REQUEST)
 
 
-# Aus_page routes
+# page routes
 api.add_resource(
     PageResource,
     api_routes_urls['page']['create_page'],

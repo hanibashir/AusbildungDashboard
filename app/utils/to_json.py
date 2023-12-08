@@ -17,11 +17,3 @@ def message_to_json(msg, status):
             "status": status
         }
     )
-
-# def message_to_json(msg, status):
-#     return jsonify(
-#         {
-#             "message": msg,
-#             "status": status
-#         }
-#     )

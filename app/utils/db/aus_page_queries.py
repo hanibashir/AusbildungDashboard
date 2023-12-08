@@ -1,6 +1,6 @@
 from app import db
 from app.utils.constants import CREATED, BAD_REQUEST, UPDATED
-from app.utils.db.Queries import Queries
+from app.utils.db.queries import Queries
 from app.models.aus_page import AusPage
 
 
