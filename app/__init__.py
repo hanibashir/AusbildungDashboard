@@ -38,14 +38,14 @@ def create_app():
     app.register_blueprint(category_blueprint)
     app.register_blueprint(page_blueprint)
 
-    # create db tables
+    # import db models
     from .models.user import User
     from .models.aus_page import AusPage
     from .models.page import Page
     from .models.category import Category
     from .models.role import Role
     from .models.user_role import UserRole
-
+    # create db tables
     with app.app_context():
         db.create_all()
 
