@@ -26,7 +26,7 @@ def create_app():
     # migration
     migrate = Migrate(app=app, db=db)
 
-    # TODO: Import and register app blueprints
+    # Import and register app blueprints
     # Import blueprints
     from .api.users import user_blueprint
     from .api.aus_pages import aus_page_blueprint
