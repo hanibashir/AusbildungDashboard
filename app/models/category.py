@@ -16,10 +16,10 @@ class Category(db.Model):
 
     def to_dict(self):
         return {
-            "category_id": self.CategoryID,
-            "title": self.Title,
-            "description": self.Description,
-            "image_url": self.ImageUrl
+            "CategoryID": self.CategoryID,
+            "Title": self.Title,
+            "Description": self.Description,
+            "ImageUrl": self.ImageUrl
         }
 
     def __repr__(self):

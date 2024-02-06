@@ -4,7 +4,7 @@ import re
 
 class UserValidator:
     """
-        validate user registration form input.
+        validate profile registration form input.
         [data] contains fields values in json format:
             name, password, confirm_password, email, image_url, registered_date, last_login
     """
@@ -13,36 +13,36 @@ class UserValidator:
         self.__name = data['name']
         self.__email = data['email']
         self.__password = data['password']
-        self.__confirm_password = data['c_password']
+        self.__confirm_password = data['confirm_password']
 
     def validate_user_input(self) -> tuple[bool, str]:
         # if the fields are empty
         if self.__name:
             if not self.validate_name():
-                return False, message('user', 'NAME_NOT_VALID')
+                return False, message('profile', 'NAME_NOT_VALID')
         else:
-            return False, message('user', 'EMPTY_FIELD', 'name')
+            return False, message('profile', 'EMPTY_FIELD', 'name')
         # check email
         if self.__email:
             # validate email
             if not self.validate_user_email():
-                return False, message('user', 'EMAIL_NOT_VALID')
+                return False, message('profile', 'EMAIL_NOT_VALID')
         else:
-            return False, message('user', 'EMPTY_FIELD', 'email')
+            return False, message('profile', 'EMPTY_FIELD', 'email')
         # check password
         if self.__password:
             # validate password
             if not self.validate_password():
-                return False, message('user', 'PASS_FORMAT')
+                return False, message('profile', 'PASS_FORMAT')
         else:
-            return False, message('user', 'EMPTY_FIELD', 'password')
+            return False, message('profile', 'EMPTY_FIELD', 'password')
         # check password confirm not empty
         if not self.__confirm_password:
-            return False, message('user', 'EMPTY_FIELD', 'c_password')
+            return False, message('profile', 'EMPTY_FIELD', 'c_password')
 
         # password confirmation
         if self.__password != self.__confirm_password:
-            return False, message('user', 'PASS_CONFIRM')
+            return False, message('profile', 'PASS_CONFIRM')
 
         return True, ''
 

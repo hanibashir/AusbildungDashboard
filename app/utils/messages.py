@@ -2,11 +2,11 @@ from app.utils.constants import CREATED, OK, UPDATED, CONFLICT, NOT_FOUND, BAD_R
 
 
 def message(model, status, field=None):
-    if model == 'user':
+    if model == 'profile':
         if field:
-            return messages_list['user'][status][field]
+            return messages_list['profile'][status][field]
         else:
-            return messages_list['user'][status]
+            return messages_list['profile'][status]
     elif model == 'aus_page':
         if field:
             return messages_list['aus_page'][status][field]
@@ -25,10 +25,10 @@ def message(model, status, field=None):
 
 
 messages_list = {
-    'user': {
-        # new user created
+    'profile': {
+        # new profile created
         CREATED: 'User created successfully',
-        # user successfully logged in
+        # profile successfully logged in
         OK: '',
         UPDATED: 'User updated successfully',
         'DELETED': 'User deleted successfully',

@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}
+    New Post
+{% endblock %}
+
+{# # title, duration, certificate, content, category_id, user_id, published_date, updated_date,
+{#        # image_url = None, shift_type = None, first_year_salary = 0, second_year_salary = 0, third_year_salary = 0,
+{#        # fourth_year_salary = 0, best_paid = False, popular = False, links = None, published = False #}
+{% block main %}
+
+    <div class="container">
+        <h3>Edit: {{ post['title'] }}</h3>
+
+
+        <form name="edit_post_form" action="/dashboard/post" method="post" enctype="multipart/form-data">
+            <div class="row col-12">
+                {# Title #}
+                <div class="col-8 form-group mb-3">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Title"
+                           value="{{ post['title'] }}">
+                </div>
+                {# Duration #}
+                <div class="col-4 form-group mb-3">
+                    <label for="duration">Duration</label>
+                    <input type="text" class="form-control" name="duration" id="duration" placeholder="duration"
+                           value="{{ post['duration'] }}">
+                </div>
+            </div>
+            <div class="row col-12">
+                {# Content #}
+                <div class="col-8 form-group mb-3">
+                    <label for="content">Content</label>
+                    <textarea class="form-control" name="content" id="content" rows="3"
+                              placeholder="Content">{{ post['content'] }}</textarea>
+                </div>
+
+                {# Certificate #}
+                <div class="col-4 form-group mb-3">
+                    <label for="certificate">Certificate</label>
+                    <input type="text" class="form-control" name="certificate" id="certificate"
+                           placeholder="certificate" value="{{ post['certificate'] }}">
+                </div>
+            </div>
+            <div class="row col-12">
+                <div class="row col-8">
+                    {# First Year Salary #}
+                    <div class="col-3 form-group mb-3">
+                        <label for="first_year_salary">First Year Salary</label>
+                        <input type="text" class="form-control" name="first_year_salary" id="first_year_salary"
+                               placeholder="First Year Salary" value="{{ post['first_year_salary'] }}">
+                    </div>
+                    {# Second Year Salary #}
+                    <div class="col-3 form-group mb-3">
+                        <label for="second_year_salary">Second Year Salary</label>
+                        <input type="text" class="form-control" name="second_year_salary" id="second_year_salary"
+                               placeholder="Second Year Salary" value="{{ post['second_year_salary'] }}">
+                    </div>
+                    {# Third Year Salary #}
+                    <div class="col-3 form-group mb-3">
+                        <label for="third_year_salary">Third Year Salary</label>
+                        <input type="text" class="form-control" name="third_year_salary" id="third_year_salary"
+                               placeholder="Third Year Salary" value="{{ post['third_year_salary'] }}">
+                    </div>
+                    {# Fourth Year Salary #}
+                    <div class="col-3 form-group mb-3">
+                        <label for="fourth_year_salary">Fourth Year Salary</label>
+                        <input type="text" class="form-control" name="fourth_year_salary" id="fourth_year_salary"
+                               placeholder="Fourth Year Salary" value="{{ post['fourth_year_salary'] }}">
+                    </div>
+                </div>
+
+                {# Shift Type #}
+                <div class="col-4 form-group mb-3">
+                    <label for="shift_type">Shift Type</label>
+                    <input type="text" class="form-control" name="shift_type" id="shift_type"
+                           placeholder="Shift Type" value="{{ post['shift_type'] }}">
+                </div>
+            </div>
+            <div class="row">
+
+
+                {# Category selection #}
+                <div class="col-3 form-group mb-3">
+                    <label for="category_selection">Category</label>
+                    <select class="form-control" id="category_selection" name="category_id">
+                        <option selected value="{{ post_cat['category_id'] }}">{{ post_cat['title'] }}</option>
+                        {% for category in categories %}
+                            <option value="{{ category['category_id'] }}">{{ category['title'] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                {# Post Image #}
+                <div class="col-3 form-group mb-3">
+                    <label for="img">
+                        <h5>Change Image</h5>
+                    </label>
+                    <div class="row">
+                        <input type="file" id="img" name="img" accept="image/*" class="col-6">
+                        <input type="hidden" name="old_img_url" value="{{ post['image_url'] }}">
+                        <img class="rounded col-6" src="../{{ post['image_url'] }}" width="90" height="90" alt="">
+                    </div>
+
+                </div>
+
+                <div class="row col-6">
+                    {# Best Paid #}
+                    <div class="col-4 form-group">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="1" id="best_paid"
+                                   name="best_paid">
+                            <label class="form-check-label" for="best_paid"> Best Paid </label>
+                        </div>
+                    </div>
+                    {# Popular #}
+                    <div class="col-4 form-group">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="1" id="popular" name="popular">
+                            <label class="form-check-label" for="popular"> Popular </label>
+                        </div>
+                    </div>
+                    {# Publish Status #}
+                    <div class="col-4 form-group">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="1" id="publish" name="publish">
+                            <label class="form-check-label" for="publish"> Publish </label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <input type="hidden" name="post_id" value="{{ post['post_id'] }}">
+            <div class="text-center">
+                <button class="btn btn-primary mb-3" type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+
+
+{% endblock %}

@@ -1,21 +1,16 @@
 class Config:
-    SQLALCHEMY_TRACK_MODIFICATIONS = False  # Disable Flask-SQLAlchemy modification tracking
-    DEBUG = True
+    SESSION_PERMANENT = False
+    # Configure session to use filesystem (instead of signed cookies)
+    SESSION_TYPE = "filesystem"
+    # app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=5)
+    # The maximum number of items the session stores
+    # before it starts deleting some, default 500
+    SESSION_FILE_THRESHOLD = 100
+    IMAGES_UPLOAD_FOLDER = "static/images"
+    POSTS_UPLOAD_FOLDER = "static/images/posts"
+    USERS_UPLOAD_FOLDER = "static/images/users"
+    CATS_UPLOAD_FOLDER = "static/images/category"
 
-
-class DevelopmentConfig(Config):
-    TESTING = False
-    DEBUG = True
-    # database URL
+    # DB
     SQLALCHEMY_DATABASE_URI = 'sqlite:///db.sqlite'
-    
-
-
-class TestingConfig(Config):
-    DEBUG = True
-    # Temporary database URL
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
-
-
-class ProductionConfig:
-    pass
+    SQLALCHEMY_TRACK_MODIFICATIONS = False  # Disable Flask-SQLAlchemy modification tracking

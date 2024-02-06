@@ -39,7 +39,7 @@ class Page(db.Model):
             "content": self.Content,
             "category_id": self.CategoryID,
             "user_id": self.UserID,
-            "image_url": "upload/images/users/user.png",
+            "image_url": "upload/images/users/profile.png",
             "links": self.Links,
             "published": self.Published
         }
