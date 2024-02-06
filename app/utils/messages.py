@@ -2,16 +2,16 @@ from app.utils.constants import CREATED, OK, UPDATED, CONFLICT, NOT_FOUND, BAD_R
 
 
 def message(model, status, field=None):
-    if model == 'profile':
+    if model == 'user':
         if field:
-            return messages_list['profile'][status][field]
+            return messages_list['user'][status][field]
         else:
-            return messages_list['profile'][status]
-    elif model == 'aus_page':
+            return messages_list['user'][status]
+    elif model == 'post':
         if field:
-            return messages_list['aus_page'][status][field]
+            return messages_list['post'][status][field]
         else:
-            return messages_list['aus_page'][status]
+            return messages_list['post'][status]
     elif model == 'category':
         if field:
             return messages_list['category'][status][field]
@@ -25,13 +25,13 @@ def message(model, status, field=None):
 
 
 messages_list = {
-    'profile': {
+    'user': {
         # new profile created
         CREATED: 'User created successfully',
         # profile successfully logged in
         OK: '',
         UPDATED: 'User updated successfully',
-        'DELETED': 'User deleted successfully',
+        'DELETED': 'User successfully deleted',
         'EMPTY_FIELD': {
             'name': 'Please enter your name',
             'email': 'Please enter your email',
@@ -48,20 +48,20 @@ messages_list = {
         NOT_FOUND: 'User not found',
         BAD_REQUEST: 'Something went wrong!'
     },
-    'aus_page': {
+    'post': {
         'TITLE_NOT_VALID': '',
         'EMPTY_FIELD': {
-            'title': 'Please enter the ausbildung page title',
+            'title': 'Please enter the ausbildung post title',
             'duration': 'Please enter ausbildung duration',
             'certificate': 'Please enter ausbildung certificate',
             'content': 'Please enter ausbildung content',
             'category_id': 'Please choose ausbildung category'
         },
         CREATED: 'Ausbildung Page created successfully',
-        NOT_FOUND: 'Page not found',
+        NOT_FOUND: 'Post not found',
         OK: '',
-        UPDATED: 'Page updated successfully',
-        'DELETED': 'Page deleted successfully',
+        UPDATED: 'Post updated successfully',
+        'DELETED': 'Post successfully deleted',
         BAD_REQUEST: 'Something went wrong!'
     },
     'category': {

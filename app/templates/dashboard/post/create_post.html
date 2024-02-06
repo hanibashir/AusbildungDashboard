@@ -85,10 +85,11 @@
                     <select class="form-control" id="category_id" name="category_id">
                         <option selected disabled value="0">Choose Category</option>
                         {% for cat in cats %}
-                            <option value="{{ cat['CategoryID'] }}">{{ cat['Title'] }}</option>
+                            <option value="{{ cat['category_id'] }}">{{ cat['title'] }}</option>
                         {% endfor %}
                     </select>
                 </div>
+
                 {# Post Image #}
                 <div class="col-3 form-group mb-3">
                     <label for="img">
@@ -96,8 +97,8 @@
                     </label>
                     <input type="file" id="img" name="img" accept="image/*">
                 </div>
-                <div class="row col-6">
 
+                <div class="row col-6">
                     {# Best Paid #}
                     <div class="col-4 form-group">
                         <div class="form-check mb-3">

@@ -1,3 +1,5 @@
+from flask import flash
+
 from flask import redirect, session
 from app.views.dashboard.user import user_blueprint
 
@@ -10,5 +12,5 @@ def logout():
     session.pop("user_id")
 
     # Redirect profile to log in form
-    # flash("Logged out!")
+    flash("Logged out!")
     return redirect("/")

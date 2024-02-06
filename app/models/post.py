@@ -27,8 +27,8 @@ class Post(db.Model):
     UpdatedDate = db.Column(db.DateTime)
 
     # Relationships with the Categories and Users tables
-    category = relationship('Category', backref='posts')
-    user = relationship('User', backref='posts')
+    category = relationship('Category', backref='post')
+    user = relationship('User', backref='post')
 
     def __init__(self, title, duration, certificate, content, category_id, user_id, published_date, updated_date,
                  image_url=None, shift_type=None, first_year_salary=0, second_year_salary=0, third_year_salary=0,
@@ -54,7 +54,7 @@ class Post(db.Model):
 
     def to_dict(self):
         return {
-            "post_id": self.AusPageID,
+            "post_id": self.PostID,
             "title": self.Title,
             "duration": self.Duration,
             "certificate": self.Certificate,
@@ -68,7 +68,7 @@ class Post(db.Model):
             "fourth_year_salary": self.FourthYearSalary,
             "best_paid": self.BestPaid,
             "popular": self.Popular,
-            "image_url": "upload/images/users/profile.png",
+            "image_url": self.ImageUrl,
             "links": self.Links,
             "published": self.Published
         }

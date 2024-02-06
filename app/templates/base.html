@@ -46,7 +46,7 @@
                         <a class="nav-link" href="/dashboard">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/user/profile">Profile</a>
+                        <a class="nav-link" href="user/profile">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Log Out</a>
@@ -66,25 +66,26 @@
     </div>
 </nav>
 
-{% if get_flashed_messages() %}
-    <header>
-        <div class="alert alert-primary mb-0 text-center" role="alert">{{ get_flashed_messages()|join(' ') }}</div>
-    </header>
-{% endif %}
-
-{# flash message #}
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <ul class=flashes>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-{% endwith %}
-{# end flash message #}
 
 <main class="container-fluid py-5 mt-5">
+
+    {# flash message #}
+    {% if get_flashed_messages() %}
+        <header>
+            <div class="alert alert-primary mb-4 text-center" role="alert">{{ get_flashed_messages()|join(' ') }}</div>
+        </header>
+    {% endif %}
+    {# end flash message #}
+
+{#{% with messages = get_flashed_messages() %}#}
+{#        {% if messages %}#}
+{#            <ul class="alert alert-primary mb-0 text-center" role="list">#}
+{#                {% for message in messages %}#}
+{#                    <li>{{ message }}</li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        {% endif %}#}
+{#    {% endwith %}#}
     {% block main %}
 
     {% endblock %}

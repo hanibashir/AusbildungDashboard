@@ -25,26 +25,27 @@
                 {% for post in posts %}
                     <tr>
                         <th scope="row">{{ loop.index }}</th>
-                        <th scope="row"><img src="../{{ post['thumbnail'] }}" width="50" height="50"
-                                             class="rounded border"></th>
+                        <th scope="row"><img src="../{{ post['image_url'] }}" width="50" height="50"
+                                             class="rounded border" alt=""></th>
                         <td class="text-start">{{ post['title'][:25] }}...</td>
-                        <td>{{ post['category'][:20] }}</td>
+                        <td>{{ post['category_id'] }}</td>
                         <td>{% if post['published'] %} Yes {% else %} No {% endif %}</td>
                         <td class="text-end">
                             <button class="btn btn-info text-white" type="submit">
                                 <a class="text-decoration-none text-white"
                                    href="/dashboard/post?post_id=
+
                                            {% if post['post_id'] %}{{ post['post_id'] }}{% else %}{{ post['id'] }}{% endif %}&action=edit">Edit</a>
                             </button>
 
-                            <!-- {% set post_id = post['post_id'] %}
-                    {% set cat_id = post['cat_id'] %}
-                    {% set id_list = (post_id,cat_id) %} -->
-
-                            <!-- {{ id_list|join(' ') }} -->
+                            {# {% set post_id = post['post_id'] %}#}
+                            {# {% set cat_id = post['category_id'] %}#}
+                            {# {% set id_list = (post_id,cat_id) %}#}
+                            {# {{ id_list|join(' ') }}#}
 
                             <form action="/dashboard" method="post" style="display: inline;">
                                 <input type="hidden" name="delete_post" value="
+
                                         {% if post['post_id'] %}{{ post['post_id'] }}{% else %}{{ post['id'] }}{% endif %}">
                                 <button class="btn btn-danger text-white" type="submit">Delete</button>
                             </form>
@@ -81,7 +82,7 @@
                             </button>
 
                             <form action="/dashboard" method="post" style="display: inline;">
-                                <input type="hidden" name="delete_cat" value="{{ cat['id'] }}">
+                                <input type="hidden" name="delete_cat" value="{{ cat['category_id'] }}">
                                 <button class="btn btn-danger text-white" type="submit">Delete</button>
                             </form>
 

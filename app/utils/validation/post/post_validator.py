@@ -18,14 +18,14 @@ class PostValidator:
     def validate_post_input(self) -> tuple[bool, str]:
         # if the fields are empty
         if not self.__title:
-            return False, message('posts', 'EMPTY_FIELD', 'title')
+            return False, message('post', 'EMPTY_FIELD', 'title')
         elif not self.__duration:
-            return False, message('posts', 'EMPTY_FIELD', 'duration')
+            return False, message('post', 'EMPTY_FIELD', 'duration')
         elif not self.__certificate:
-            return False, message('posts', 'EMPTY_FIELD', 'certificate')
+            return False, message('post', 'EMPTY_FIELD', 'certificate')
         elif not self.__content:
-            return False, message('posts', 'EMPTY_FIELD', 'content')
+            return False, message('post', 'EMPTY_FIELD', 'content')
         elif not self.__category_id:
-            return False, message('posts', 'EMPTY_FIELD', 'category_id')
+            return False, message('post', 'EMPTY_FIELD', 'category_id')
         else:
             return True, ''

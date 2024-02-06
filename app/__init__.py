@@ -23,7 +23,7 @@ def create_app():
 
     Session(app)
 
-    # regiater the views
+    # register the views
     app.register_blueprint(dashboard_blueprint)
     app.register_blueprint(blog_blueprint)
     app.register_blueprint(user_blueprint)

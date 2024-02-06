@@ -12,19 +12,20 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if session.get("user_id") is None:
-            return redirect(url_for("profile.login"))
+            return redirect(url_for("user.login"))
         return f(*args, **kwargs)
-
     return decorated_function
 
 
 def upload_image(folder_path, image):
     """ upload image to images folder and return the path to it """
+    # C:\Users\path\to\app\folder
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    # add date to image name to make it unique
+    # add date and user ID to the image name to make it unique
     # dt_obj = datetime.strptime('20.12.2016 09:38:42,76', '%d.%m.%Y %H:%M:%S,%f') millisec = dt_obj.timestamp() * 1000
     time_in_milli = datetime.now().timestamp() * 1000
-    image_name = str(int(time_in_milli)) + " " + image.filename
+    old_name, image_ext = os.path.splitext(image.filename)
+    image_name = str(int(time_in_milli)) + "-" + str(session['user_id']) + image_ext
     # get full path to the image
     image_url = os.path.join(project_root, folder_path, secure_filename(image_name))
     # save it in the upload server
