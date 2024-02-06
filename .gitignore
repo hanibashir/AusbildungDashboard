@@ -21,6 +21,8 @@ sdist/
 var/
 wheels/
 share/python-wheels/
+flask_session/
+.idea/
 *.egg-info/
 .installed.cfg
 *.egg
