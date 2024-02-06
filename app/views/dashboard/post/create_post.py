@@ -10,7 +10,7 @@ from .. import dashboard_blueprint
 @dashboard_blueprint.route("/dashboard/post/create", methods=["GET", "POST"])
 @login_required
 def create_post():
-    """Add new post"""
+    """Add new posts"""
     if request.method == "POST":
         """
             {
@@ -50,4 +50,4 @@ def create_post():
     else:
         rows = CategoryQueries().select_all()
         cats_list = [row.to_dict() for row in rows]
-        return render_template("dashboard/post/create_post.html", cats=cats_list)
+        return render_template("dashboard/posts/create_post.html", cats=cats_list)

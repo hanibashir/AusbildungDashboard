@@ -20,7 +20,7 @@ class PostService(Queries):
 
     def get_post_by_id(self, post_id):
         return db.session.get(self.post, post_id)
-        # return self.post.query.get(page_id)
+        # return self.posts.query.get(page_id)
 
     def insert_post(self, image_url):
         published_date = self.date_time.now()
@@ -51,11 +51,11 @@ class PostService(Queries):
             # insert into users table
             self.insert(new_post)
 
-            return self.message('post', CREATED)
+            return self.message('posts', CREATED)
         except self.sql_exception as se:
             if se:
                 return se
-            return self.message('post', BAD_REQUEST)
+            return self.message('posts', BAD_REQUEST)
 
     def update_post(self, post: Post, image_url=None):
         """
@@ -87,19 +87,19 @@ class PostService(Queries):
             # commit changes to db
             self.flush_and_commit()
 
-            return self.message('post', UPDATED)
+            return self.message('posts', UPDATED)
         except self.sql_exception as se:
             if se:
                 return False, se
-            return self.message('post', BAD_REQUEST)
+            return self.message('posts', BAD_REQUEST)
 
     def delete_post(self, post_id) -> tuple[bool, str]:
         try:
             self.post.query.filter(Post.PostID == post_id).delete()
             # commit changes to db
             self.flush_and_commit()
-            return True, self.message('post', 'DELETED')
+            return True, self.message('posts', 'DELETED')
         except self.sql_exception as se:
             if se:
                 return False, se
-            return False, self.message('post', BAD_REQUEST)
+            return False, self.message('posts', BAD_REQUEST)

@@ -10,7 +10,7 @@ from .. import dashboard_blueprint
 @dashboard_blueprint.route("/dashboard/post", strict_slashes=False, methods=["GET", "POST"])
 @login_required
 def edit_post():
-    """Update post"""
+    """Update posts"""
     if request.method == "POST":
         return validate_insert_or_update(command='update', data=request.form.to_dict())  # flat=True
     else:
@@ -22,7 +22,7 @@ def edit_post():
                 post_cat = row_to_dict(CategoryQueries().select_category(category_id=post['category_id']))
                 categories = rows_to_dict(CategoryQueries().select_all())
                 return render_template(
-                    "dashboard/post/edit_post.html",
+                    "dashboard/posts/edit_post.html",
                     post=post,
                     post_cat=post_cat,
                     category=categories

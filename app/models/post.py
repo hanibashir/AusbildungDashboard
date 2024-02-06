@@ -27,8 +27,8 @@ class Post(db.Model):
     UpdatedDate = db.Column(db.DateTime)
 
     # Relationships with the Categories and Users tables
-    category = relationship('Category', backref='post')
-    user = relationship('User', backref='post')
+    category = relationship('Category', backref='posts')
+    user = relationship('User', backref='posts')
 
     def __init__(self, title, duration, certificate, content, category_id, user_id, published_date, updated_date,
                  image_url=None, shift_type=None, first_year_salary=0, second_year_salary=0, third_year_salary=0,
