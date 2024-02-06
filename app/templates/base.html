@@ -17,7 +17,7 @@
     <!-- https://favicon.io/emoji-favicons/money-bag/ -->
     <!-- <link href="/static/favicon.ico" rel="icon" /> -->
 
-    <link href="/static/css/styles.css" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet"/>
 
     <title>
         Ausbildung App |{% block title %}
@@ -30,8 +30,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
 
     <div class="container-fluid">
-        <a class="navbar-brand" href="/"><span class="red">Blog</span><span class="yellow">5</span><span
-                class="green">0</span></a>
+        <a class="navbar-brand" href="/"><span class="blue">Ausbildung Dashboard</span></a>
         <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
                 data-bs-target="#navbar" data-bs-toggle="collapse" type="button"><span
                 class="navbar-toggler-icon"></span></button>
@@ -77,22 +76,13 @@
     {% endif %}
     {# end flash message #}
 
-{#{% with messages = get_flashed_messages() %}#}
-{#        {% if messages %}#}
-{#            <ul class="alert alert-primary mb-0 text-center" role="list">#}
-{#                {% for message in messages %}#}
-{#                    <li>{{ message }}</li>#}
-{#                {% endfor %}#}
-{#            </ul>#}
-{#        {% endif %}#}
-{#    {% endwith %}#}
     {% block main %}
 
     {% endblock %}
 </main>
 
 <footer class="mb-5 small text-center text-muted">
-    Copyright &copy; 2024 <a href="https://hblab.com/apps/ausbildung-app">Ausbildung App</a>
+    Copyright &copy; 2024 <a href="https://devjourney.dev/projects">Ausbildung App</a>
 </footer>
 </body>
 </html>

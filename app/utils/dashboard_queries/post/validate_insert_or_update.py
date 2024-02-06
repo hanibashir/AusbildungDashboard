@@ -27,6 +27,7 @@ def validate_insert_or_update(command, data):
         if command == 'insert':
             image_short_url = os.path.join(current_app.config["IMAGES_UPLOAD_FOLDER"] + "/" + "no_image.jpg")
         elif command == 'update':
+
             image_short_url = data['old_img_url']
     else:  # there's image
         if command == 'insert':
@@ -37,7 +38,7 @@ def validate_insert_or_update(command, data):
             image_short_url = upload_image(folder_path=current_app.config["POSTS_UPLOAD_FOLDER"], image=image)
             # delete the old image from the folder after uploading the new one
             head, image_name = os.path.split(data['old_img_url'])
-            project_root: str = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+            project_root: str = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
             image_path = os.path.join(project_root, 'static', 'images', 'posts', image_name)
             if Path(image_path).is_file():
                 os.remove(image_path)

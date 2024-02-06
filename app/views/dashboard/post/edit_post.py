@@ -1,7 +1,7 @@
 from flask import request, url_for, redirect, render_template
 from app.utils.dashboard_queries.category.category_queries import CategoryQueries
 from app.utils.dashboard_queries.post.post_queries import PostService
-from app.utils.dashboard_queries.post import validate_insert_or_update
+from app.utils.dashboard_queries.post.validate_insert_or_update import validate_insert_or_update
 from app.utils.query_obj_to_dict import row_to_dict, rows_to_dict
 from app.utils.helpers import login_required
 from .. import dashboard_blueprint

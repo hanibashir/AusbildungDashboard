@@ -82,7 +82,7 @@
 
 
                 {# Category selection #}
-                <div class="col-3 form-group mb-3">
+                <div class="col-2 form-group mb-3">
                     <label for="category_selection">Category</label>
                     <select class="form-control" id="category_selection" name="category_id">
                         <option selected value="{{ post_cat['category_id'] }}">{{ post_cat['title'] }}</option>
@@ -93,19 +93,23 @@
                 </div>
 
                 {# Post Image #}
-                <div class="col-3 form-group mb-3">
+                <div class="col-6 form-group mb-3">
                     <label for="img">
-                        <h5>Change Image</h5>
+                        Change Image
                     </label>
                     <div class="row">
-                        <input type="file" id="img" name="img" accept="image/*" class="col-6">
+                        <input type="file" id="img" name="img" accept="image/*" class="col-6"> <br>
                         <input type="hidden" name="old_img_url" value="{{ post['image_url'] }}">
-                        <img class="rounded col-6" src="../{{ post['image_url'] }}" width="90" height="90" alt="">
+                        <div class="col-6 form-group">
+                            <label for="post_current_image col-6">Current Image</label>
+                            <img id="post_current_image" class="rounded-top col-6" src="../{{ post['image_url'] }}"
+                                 width="30" height="100" alt="">
+                        </div>
                     </div>
 
                 </div>
 
-                <div class="row col-6">
+                <div class="row col-4">
                     {# Best Paid #}
                     <div class="col-4 form-group">
                         <div class="form-check mb-3">
@@ -133,7 +137,7 @@
             </div>
             <input type="hidden" name="post_id" value="{{ post['post_id'] }}">
             <div class="text-center">
-                <button class="btn btn-primary mb-3" type="submit">Save</button>
+                <button class="btn btn-primary mb-3 mt-5" type="submit">Update</button>
             </div>
         </form>
     </div>
