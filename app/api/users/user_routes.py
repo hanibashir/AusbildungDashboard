@@ -3,7 +3,7 @@ from flask_restful import Resource, Api
 from . import user_blueprint
 from ...models.user import User
 from ...utils.constants import api_routes_urls, OK, BAD_REQUEST, CONFLICT, CREATED, NOT_FOUND, UPDATED
-from ...utils.db.user_queries import UserQueries
+from ...utils.api_queries.user_queries import UserQueries
 from ...utils.validation.user_validator import UserValidator
 from ...utils.messages import message
 from ...utils.to_json import message_to_json, row_to_json, rows_to_json
@@ -106,19 +106,19 @@ class UserResource(Resource):
 
 
 # User routes
-api.add_resource(
-    UserResource,
-    api_routes_urls['user']['create_user'],
-    endpoint=api_routes_urls['user']['create_user']
-)
-api.add_resource(
-    UserResource,
-    api_routes_urls['user']['get_single_user'],
-    endpoint=api_routes_urls['user']['get_single_user']
-)
-
-api.add_resource(
-    UserListResource,
-    api_routes_urls['user']['get_users_list'],
-    endpoint=api_routes_urls['user']['get_users_list']
-)
+# api.add_resource(
+#     UserResource,
+#     api_routes_urls['user']['create_user'],
+#     endpoint=api_routes_urls['user']['create_user']
+# )
+# api.add_resource(
+#     UserResource,
+#     api_routes_urls['user']['get_single_user'],
+#     endpoint=api_routes_urls['user']['get_single_user']
+# )
+#
+# api.add_resource(
+#     UserListResource,
+#     api_routes_urls['user']['get_users_list'],
+#     endpoint=api_routes_urls['user']['get_users_list']
+# )

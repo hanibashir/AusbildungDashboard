@@ -3,7 +3,7 @@ from flask_restful import Resource, Api
 from . import category_blueprint
 from ...models.category import Category
 from ...utils.constants import api_routes_urls, OK, BAD_REQUEST, CONFLICT, CREATED, NOT_FOUND, UPDATED
-from ...utils.db.category_queries import CategoryQueries
+from ...utils.api_queries.category_queries import CategoryQueries
 from ...utils.messages import message
 from ...utils.to_json import rows_to_json, message_to_json, row_to_json
 from ...utils.validation.category_validator import CategoryValidator
@@ -104,19 +104,19 @@ class CategoryResource(Resource):
 
 
 # Category routes
-api.add_resource(
-    CategoryResource,
-    api_routes_urls['category']['create_category'],
-    endpoint=api_routes_urls['category']['create_category']
-)
-api.add_resource(
-    CategoryResource,
-    api_routes_urls['category']['get_single_category'],
-    endpoint=api_routes_urls['category']['get_single_category']
-)
-
-api.add_resource(
-    CategoryListResource,
-    api_routes_urls['category']['get_categories_list'],
-    endpoint=api_routes_urls['category']['get_categories_list']
-)
+# api.add_resource(
+#     CategoryResource,
+#     api_routes_urls['category']['create_category'],
+#     endpoint=api_routes_urls['category']['create_category']
+# )
+# api.add_resource(
+#     CategoryResource,
+#     api_routes_urls['category']['get_single_category'],
+#     endpoint=api_routes_urls['category']['get_single_category']
+# )
+#
+# api.add_resource(
+#     CategoryListResource,
+#     api_routes_urls['category']['get_categories_list'],
+#     endpoint=api_routes_urls['category']['get_categories_list']
+# )

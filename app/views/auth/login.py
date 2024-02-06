@@ -1,7 +1,7 @@
 from app.views.dashboard.user import user_blueprint
 from flask import redirect, render_template, request, flash, session, url_for
 from werkzeug.security import check_password_hash
-from app.utils.db_queries.user.user_queries import UserQueries
+from app.utils.dashboard_queries.user.user_queries import UserQueries
 
 
 @user_blueprint.route("/login", strict_slashes=False, methods=["GET", "POST"])

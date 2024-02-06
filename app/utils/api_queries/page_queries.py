@@ -1,7 +1,7 @@
 from app import db
 from app.models.page import Page
 from app.utils.constants import CREATED, BAD_REQUEST, UPDATED
-from app.utils.db.queries import Queries
+from app.utils.api_queries.queries import Queries
 
 
 class PageQueries(Queries):
@@ -57,7 +57,7 @@ class PageQueries(Queries):
             page.PublishedDate = published_date
             page.UpdatedDate = updated_date
 
-            # commit changes to db
+            # commit changes to api_queries
             self.flush_and_commit()
 
             return self.message('page', UPDATED)
@@ -67,7 +67,7 @@ class PageQueries(Queries):
     def delete_page(self, page_id) -> tuple[bool, str]:
         try:
             self.page.query.filter(Page.PageID == page_id).delete()
-            # commit changes to db
+            # commit changes to api_queries
             self.flush_and_commit()
             return True, self.message('page', 'DELETED')
         except self.sql_exception:

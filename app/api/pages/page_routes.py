@@ -3,7 +3,7 @@ from flask_restful import Resource, Api
 from app.api.pages import page_blueprint
 from app.models.page import Page
 from app.utils.constants import OK, BAD_REQUEST, CREATED, NOT_FOUND, UPDATED, api_routes_urls
-from app.utils.db.page_queries import PageQueries
+from app.utils.api_queries.page_queries import PageQueries
 from app.utils.messages import message
 from app.utils.to_json import rows_to_json, message_to_json, row_to_json
 from app.utils.validation.page_validator import PageValidator
@@ -93,19 +93,19 @@ class PageResource(Resource):
 
 
 # page routes
-api.add_resource(
-    PageResource,
-    api_routes_urls['page']['create_page'],
-    endpoint=api_routes_urls['page']['create_page']
-)
-api.add_resource(
-    PageResource,
-    api_routes_urls['page']['get_single_page'],
-    endpoint=api_routes_urls['page']['get_single_page']
-)
-
-api.add_resource(
-    PageListResource,
-    api_routes_urls['page']['get_pages_list'],
-    endpoint=api_routes_urls['page']['get_pages_list']
-)
+# api.add_resource(
+#     PageResource,
+#     api_routes_urls['page']['create_page'],
+#     endpoint=api_routes_urls['page']['create_page']
+# )
+# api.add_resource(
+#     PageResource,
+#     api_routes_urls['page']['get_single_page'],
+#     endpoint=api_routes_urls['page']['get_single_page']
+# )
+#
+# api.add_resource(
+#     PageListResource,
+#     api_routes_urls['page']['get_pages_list'],
+#     endpoint=api_routes_urls['page']['get_pages_list']
+# )

@@ -2,8 +2,8 @@ import os
 from pathlib import Path
 from flask import render_template, request, session, flash, url_for, redirect
 from . import dashboard_blueprint
-from app.utils.db_queries.post.post_queries import PostService
-from app.utils.db_queries.category.category_queries import CategoryQueries
+from app.utils.dashboard_queries.post.post_queries import PostService
+from app.utils.dashboard_queries.category.category_queries import CategoryQueries
 from ...utils.helpers import login_required
 from ...utils.query_obj_to_dict import row_to_dict
 

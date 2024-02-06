@@ -1,7 +1,7 @@
 from flask import render_template, session
 from . import user_blueprint
 from ...utils.helpers import login_required
-from ...utils.db.user_queries import UserQueries
+from ...utils.api_queries.user_queries import UserQueries
 
 
 @user_blueprint.route("/user/profile", strict_slashes=False, methods=["GET", "POST"])

@@ -28,14 +28,14 @@ def create_app():
     app.register_blueprint(blog_blueprint)
     app.register_blueprint(user_blueprint)
 
-    # import db models
+    # import api_queries models
     from .models.user import User
     from .models.post import Post
     from .models.page import Page
     from .models.category import Category
     from .models.role import Role
     from .models.user_role import UserRole
-    # create db tables
+    # create api_queries tables
     with app.app_context():
         db.create_all()
 

@@ -1,12 +1,9 @@
 import os
 
-from flask import request, flash, url_for, redirect, render_template, current_app
-from app.utils.db_queries.post.post_queries import PostService
-from app.utils.db_queries.category.category_queries import CategoryQueries
+from flask import request, render_template
+from app.utils.dashboard_queries.category.category_queries import CategoryQueries
 from app.utils.helpers import login_required
-from app.utils.post_utils.validate_insert_or_update import validate_insert_or_update
-from app.utils.validation.post.post_validator import PostValidator
-from app.utils.helpers import upload_image
+from app.utils.dashboard_queries.post import validate_insert_or_update
 from .. import dashboard_blueprint
 
 

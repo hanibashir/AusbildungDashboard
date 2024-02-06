@@ -1,8 +1,8 @@
 from flask import request, make_response
 from flask_restful import Resource, Api
 from . import aus_page_blueprint
-from ...utils.constants import api_routes_urls, BAD_REQUEST, CREATED, NOT_FOUND, OK, UPDATED
-from ...utils.db.aus_page_queries import AusPageQueries
+from ...utils.constants import BAD_REQUEST, CREATED, NOT_FOUND, OK, UPDATED, api_routes_urls
+from ...utils.api_queries.aus_page_queries import AusPageQueries
 from ...utils.messages import message
 from ...utils.to_json import row_to_json, message_to_json, rows_to_json
 from ...utils.validation.aus_page_validator import AusPageValidator
@@ -92,19 +92,19 @@ class AusPageResource(Resource):
 
 
 # Aus_page routes
-api.add_resource(
-    AusPageResource,
-    api_routes_urls['aus_page']['create_aus_page'],
-    endpoint=api_routes_urls['aus_page']['create_aus_page']
-)
-api.add_resource(
-    AusPageResource,
-    api_routes_urls['aus_page']['get_single_aus_page'],
-    endpoint=api_routes_urls['aus_page']['get_single_aus_page']
-)
-
-api.add_resource(
-    AusPageListResource,
-    api_routes_urls['aus_page']['get_aus_pages_list'],
-    endpoint=api_routes_urls['aus_page']['get_aus_pages_list']
-)
+# api.add_resource(
+#     AusPageResource,
+#     api_routes_urls['post']['create_post'],
+#     endpoint=api_routes_urls['post']['create_post']
+# )
+# api.add_resource(
+#     AusPageResource,
+#     api_routes_urls['post']['get_post'],
+#     endpoint=api_routes_urls['post']['get_post']
+# )
+#
+# api.add_resource(
+#     AusPageListResource,
+#     api_routes_urls['post']['get_all_posts'],
+#     endpoint=api_routes_urls['post']['get_all_posts']
+# )

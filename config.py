@@ -12,5 +12,5 @@ class Config:
     CATS_UPLOAD_FOLDER = "static/images/category"
 
     # DB
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///db.sqlite'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///ausbildung.sqlite'
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # Disable Flask-SQLAlchemy modification tracking

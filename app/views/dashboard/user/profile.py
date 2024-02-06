@@ -7,7 +7,7 @@ from werkzeug.security import check_password_hash
 from app.utils.validation.user.user_validator import UserValidator
 from . import user_blueprint
 from app.utils.helpers import login_required, upload_image
-from app.utils.db_queries.user.user_queries import UserQueries
+from app.utils.dashboard_queries.user.user_queries import UserQueries
 
 
 @user_blueprint.route("/user/profile", strict_slashes=False, methods=["GET", "POST"])

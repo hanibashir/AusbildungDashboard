@@ -2,7 +2,7 @@ from flask import session
 from app import db
 from app.models.category import Category
 from app.utils.constants import CREATED, BAD_REQUEST, UPDATED
-from app.utils.db_queries.queries import Queries
+from app.utils.dashboard_queries.queries import Queries
 from app.models.post import Post
 
 
@@ -84,7 +84,7 @@ class PostService(Queries):
             post.ImageUrl = image_url
             post.UpdatedDate = updated_date
 
-            # commit changes to db
+            # commit changes to api_queries
             self.flush_and_commit()
 
             return self.message('post', UPDATED)
@@ -96,7 +96,7 @@ class PostService(Queries):
     def delete_post(self, post_id) -> tuple[bool, str]:
         try:
             self.post.query.filter(Post.PostID == post_id).delete()
-            # commit changes to db
+            # commit changes to api_queries
             self.flush_and_commit()
             return True, self.message('post', 'DELETED')
         except self.sql_exception as se:

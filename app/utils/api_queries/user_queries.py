@@ -1,6 +1,6 @@
 from instance.database import db
 from app.utils.constants import OK, CONFLICT, CREATED, BAD_REQUEST, UPDATED
-from app.utils.db.queries import Queries
+from app.utils.api_queries.queries import Queries
 from app.models.user import User
 from werkzeug.security import generate_password_hash
 
@@ -60,7 +60,7 @@ class UserQueries(Queries):
             user.RegisteredDate = registered_date
             user.LastLogin = last_login
 
-            # commit changes to db
+            # commit changes to api_queries
             self.flush_and_commit()
 
             return self.message('profile', UPDATED)
@@ -70,7 +70,7 @@ class UserQueries(Queries):
     def delete_user(self, user_id) -> tuple[bool, str]:
         try:
             self.user.query.filter(User.UserID == user_id).delete()
-            # commit changes to db
+            # commit changes to api_queries
             self.flush_and_commit()
             return True, self.message('profile', 'DELETED')
         except self.sql_exception:

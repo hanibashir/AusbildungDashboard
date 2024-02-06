@@ -2,7 +2,7 @@ import os
 
 from flask import request, redirect, url_for, flash, render_template, current_app
 from .. import dashboard_blueprint
-from app.utils.db_queries.category.category_queries import CategoryQueries
+from app.utils.dashboard_queries.category.category_queries import CategoryQueries
 from app.utils.helpers import login_required, upload_image
 from app.utils.validation.category.category_validator import CategoryValidator
 
