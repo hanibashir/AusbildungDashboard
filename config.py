@@ -14,3 +14,4 @@ class Config:
     # DB
     SQLALCHEMY_DATABASE_URI = 'sqlite:///ausbildung.sqlite'
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # Disable Flask-SQLAlchemy modification tracking
+

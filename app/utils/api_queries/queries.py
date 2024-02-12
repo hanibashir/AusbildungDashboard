@@ -1,4 +1,4 @@
-from instance.database import db
+from instance.base import db
 from app.utils.messages import message
 from datetime import datetime
 from sqlalchemy import exc

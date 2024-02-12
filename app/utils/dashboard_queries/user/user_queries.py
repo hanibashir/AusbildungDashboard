@@ -1,4 +1,4 @@
-from instance.database import db
+from instance.base import db
 from app.utils.constants import OK, CONFLICT, CREATED, BAD_REQUEST, UPDATED
 from app.utils.dashboard_queries.queries import Queries
 from app.models.user import User

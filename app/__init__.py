@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_session import Session
 from config import Config
-from instance.database import db
+from instance.base import db
 from flask_migrate import Migrate
 from app.views import blog, dashboard
 from app.views.dashboard import dashboard_blueprint
