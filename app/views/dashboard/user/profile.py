@@ -6,7 +6,8 @@ from werkzeug.security import check_password_hash
 
 from app.utils.validation.user.user_validator import UserValidator
 from . import user_blueprint
-from app.utils.helpers import login_required, upload_image
+from app.utils.helpers import login_required
+from app.utils.imageservice import ImageService
 from app.utils.dashboard_queries.user.user_queries import UserQueries
 
 
@@ -26,6 +27,7 @@ def profile():
         # return jsonify(data)
         validator = UserValidator(data=data, profile=True)
         queries = UserQueries(data=data)
+        image_service = ImageService()
         validated, validate_msg = validator.validate_profile_update_input()
         if not validated:
             flash(validate_msg)
@@ -42,7 +44,7 @@ def profile():
             image_short_url = data['old_img_url']
         else:
             # upload and get image path
-            image_short_url = upload_image(folder_path=current_app.config["USERS_UPLOAD_FOLDER"], image=image)
+            image_short_url = image_service.upload_image(folder_path=current_app.config["USERS_UPLOAD_FOLDER"], image=image)
             # delete the old image from the folder after uploading the new one
             head, image_name = os.path.split(data['old_img_url'])
             project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))

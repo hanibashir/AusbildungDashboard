@@ -3,12 +3,13 @@ from pathlib import Path
 from flask import flash, redirect, current_app, request, url_for, jsonify
 from app.utils.constants import BAD_REQUEST
 from app.utils.dashboard_queries.post.post_queries import PostService
-from app.utils.helpers import upload_image
+from app.utils.imageservice import ImageService
 from app.utils.validation.post.post_validator import PostValidator
 
 
 def validate_insert_or_update(command, data):
     queries = PostService(data=data)
+    image_service = ImageService()
 
     validated, validate_msg = PostValidator(data=data).validate_post_input()
 
@@ -32,13 +33,16 @@ def validate_insert_or_update(command, data):
     else:  # there's image
         if command == 'insert':
             # upload and get image path
-            image_short_url = upload_image(folder_path=current_app.config["POSTS_UPLOAD_FOLDER"], image=image)
+            image_short_url = (
+                image_service.upload_image(folder_path=current_app.config["POSTS_UPLOAD_FOLDER"], image=image))
         elif command == 'update':
             # upload and get image path
-            image_short_url = upload_image(folder_path=current_app.config["POSTS_UPLOAD_FOLDER"], image=image)
+            image_short_url = (
+                image_service.upload_image(folder_path=current_app.config["POSTS_UPLOAD_FOLDER"], image=image))
             # delete the old image from the folder after uploading the new one
             head, image_name = os.path.split(data['old_img_url'])
-            project_root: str = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+            project_root: str = os.path.dirname(
+                os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
             image_path = os.path.join(project_root, 'static', 'images', 'posts', image_name)
             if Path(image_path).is_file():
                 os.remove(image_path)
@@ -56,5 +60,3 @@ def validate_insert_or_update(command, data):
 
     flash(BAD_REQUEST)
     return redirect(url_for('dashboard.home'))
-
-

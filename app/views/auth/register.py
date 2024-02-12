@@ -3,7 +3,7 @@ import os
 from flask import url_for, redirect, render_template, request, current_app, flash
 from app.utils.validation.user.user_validator import UserValidator
 from app.utils.dashboard_queries.user.user_queries import UserQueries
-from ...utils.helpers import upload_image
+from ...utils.imageservice import ImageService
 
 
 # register profile
@@ -18,6 +18,7 @@ def register():
 
         validator = UserValidator(data=data)
         queries = UserQueries(data=data)
+        image_service = ImageService()
 
         validated, validate_msg = validator.validate_registration_input()
 
@@ -41,7 +42,7 @@ def register():
                 current_app.config["IMAGES_UPLOAD_FOLDER"] + "/" + current_app.config["DEFAULT_USER_IMAGE"])
         else:
             # get image path
-            image_short_url = upload_image(folder_path=current_app.config["USERS_UPLOAD_FOLDER"], image=image)
+            image_short_url = image_service.upload_image(folder_path=current_app.config["USERS_UPLOAD_FOLDER"], image=image)
 
         # insert new profile
         insert_msg = queries.insert_user(image_url=image_short_url)

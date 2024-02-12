@@ -3,7 +3,8 @@ import os
 from flask import request, redirect, url_for, flash, render_template, current_app
 from .. import dashboard_blueprint
 from app.utils.dashboard_queries.category.category_queries import CategoryQueries
-from app.utils.helpers import login_required, upload_image
+from app.utils.helpers import login_required
+from app.utils.imageservice import ImageService
 from app.utils.validation.category.category_validator import CategoryValidator
 
 
@@ -22,6 +23,7 @@ def create_category():
         data = request.form.to_dict()  # flat=True
         validator = CategoryValidator(data=data)
         queries = CategoryQueries(data=data)
+        image_service = ImageService()
 
         validated, validate_msg = validator.validate_category_input()
 
@@ -40,7 +42,7 @@ def create_category():
                 current_app.config["IMAGES_UPLOAD_FOLDER"] + "/" + "no_image.jpg")
         else:
             # get image path
-            image_short_url = upload_image(folder_path=current_app.config["CATS_UPLOAD_FOLDER"], image=image)
+            image_short_url = image_service.upload_image(folder_path=current_app.config["CATS_UPLOAD_FOLDER"], image=image)
 
         # insert into category table
         insert_msg = queries.insert_category(image_url=image_short_url)
