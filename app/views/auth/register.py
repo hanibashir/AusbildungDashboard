@@ -38,7 +38,7 @@ def register():
 
         if not image:
             image_short_url = os.path.join(
-                current_app.config["IMAGES_UPLOAD_FOLDER"] + "/" + "user-blue-thumbnail.png")
+                current_app.config["IMAGES_UPLOAD_FOLDER"] + "/" + current_app.config["DEFAULT_USER_IMAGE"])
         else:
             # get image path
             image_short_url = upload_image(folder_path=current_app.config["USERS_UPLOAD_FOLDER"], image=image)

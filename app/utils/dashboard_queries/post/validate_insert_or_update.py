@@ -25,7 +25,7 @@ def validate_insert_or_update(command, data):
 
     if not image:
         if command == 'insert':
-            image_short_url = os.path.join(current_app.config["IMAGES_UPLOAD_FOLDER"] + "/" + "no_image.jpg")
+            image_short_url = os.path.join(current_app.config["DEFAULT_POST_IMAGE"])
         elif command == 'update':
 
             image_short_url = data['old_img_url']

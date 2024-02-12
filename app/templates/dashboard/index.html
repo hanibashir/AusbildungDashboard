@@ -40,9 +40,7 @@
                         <td class="text-end">
                             <button class="btn btn-info text-white" type="submit">
                                 <a class="text-decoration-none text-white"
-                                   href="/dashboard/post?post_id=
-
-                                           {% if post['post_id'] %}{{ post['post_id'] }}{% else %}{{ post['id'] }}{% endif %}&action=edit">Edit</a>
+                                   href="/dashboard/post?post_id={{ post['post_id'] }}&action=edit">Edit</a>
                             </button>
 
                             {# {% set post_id = post['post_id'] %}#}
@@ -52,6 +50,10 @@
 
                             <form action="/dashboard" method="post" style="display: inline;">
                                 <input type="hidden" name="delete_post" value="
+
+
+
+
 
 
 
@@ -96,7 +98,7 @@
                         <td class="text-end">
                             <button class="btn btn-info text-white" type="submit">
                                 <a class="text-decoration-none text-white"
-                                   href="/dashboard/cat?cat_id={{ cat['id'] }}&action=edit">Edit</a>
+                                   href="/dashboard/category?cat_id={{ cat['category_id'] }}&action=edit">Edit</a>
                             </button>
 
                             <form action="/dashboard" method="post" style="display: inline;">

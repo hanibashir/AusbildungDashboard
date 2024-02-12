@@ -6,9 +6,15 @@ class Config:
     # The maximum number of items the session stores
     # before it starts deleting some, default 500
     SESSION_FILE_THRESHOLD = 100
+
     IMAGES_UPLOAD_FOLDER = "static/images"
+
     POSTS_UPLOAD_FOLDER = "static/images/posts"
+    DEFAULT_POST_IMAGE = "static/images/default_post_image.png"
+
     USERS_UPLOAD_FOLDER = "static/images/users"
+    DEFAULT_USER_IMAGE = "static/images/user-blue-thumbnail.png"
+
     CATS_UPLOAD_FOLDER = "static/images/category"
 
     # DB
