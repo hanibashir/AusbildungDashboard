@@ -1,6 +1,6 @@
 from instance.base import db
-from app.utils.constants import OK, CONFLICT, CREATED, BAD_REQUEST, UPDATED
-from app.utils.api_queries.queries import Queries
+from app.utils.constants import CONFLICT, CREATED, BAD_REQUEST, UPDATED
+from app.database.dashboard_queries.queries import Queries
 from app.models.user import User
 from werkzeug.security import generate_password_hash
 
@@ -38,40 +38,42 @@ class UserQueries(Queries):
                 password=generate_password_hash(self.data['password']),
                 email=self.data['email'],
                 image_url=image_url,
+                about=None,
                 registered_date=registered_date,
                 last_login=last_login
             )
             # insert into users table
             self.insert(new_user)
-            return self.message('profile', CREATED)
+            return self.message('user', CREATED)
         except self.sql_exception:
-            return self.message('profile', BAD_REQUEST)
+            return self.message('user', BAD_REQUEST)
 
-    def update_user(self, user):
+    def update_user(self, user, img_url=None):
         # name, password, confirm_password, email, image_url, registered_date, last_login
-        user_img = self.data['image_url']
         registered_date = user.RegisteredDate
         last_login = user.LastLogin
         try:
             user.Name = self.data['name']
-            user.Password = generate_password_hash(self.data['password'])
+            if self.data['password'] != '':
+                user.Password = generate_password_hash(self.data['password'])
             user.Email = self.data['email']
-            user.ImageUrl = user_img
+            user.ImageUrl = img_url
+            user.About = self.data['about']
             user.RegisteredDate = registered_date
             user.LastLogin = last_login
 
             # commit changes to api_queries
             self.flush_and_commit()
 
-            return self.message('profile', UPDATED)
+            return self.message('user', UPDATED)
         except self.sql_exception:
-            return self.message('profile', BAD_REQUEST)
+            return self.message('user', BAD_REQUEST)
 
     def delete_user(self, user_id) -> tuple[bool, str]:
         try:
             self.user.query.filter(User.UserID == user_id).delete()
             # commit changes to api_queries
             self.flush_and_commit()
-            return True, self.message('profile', 'DELETED')
+            return True, self.message('user', 'DELETED')
         except self.sql_exception:
-            return False, self.message('profile', BAD_REQUEST)
+            return False, self.message('user', BAD_REQUEST)

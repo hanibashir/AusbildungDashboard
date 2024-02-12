@@ -1,7 +1,7 @@
 from app import db
 from app.models.page import Page
 from app.utils.constants import CREATED, BAD_REQUEST, UPDATED
-from app.utils.api_queries.queries import Queries
+from app.database.api_queries.queries import Queries
 
 
 class PageQueries(Queries):

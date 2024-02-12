@@ -2,11 +2,11 @@ from flask import request, make_response
 from flask_restful import Resource, Api
 from . import category_blueprint
 from ...models.category import Category
-from ...utils.constants import api_routes_urls, OK, BAD_REQUEST, CONFLICT, CREATED, NOT_FOUND, UPDATED
-from ...utils.api_queries.category_queries import CategoryQueries
+from ...utils.constants import OK, BAD_REQUEST, CONFLICT, CREATED, NOT_FOUND, UPDATED
+from app.database.api_queries.category_queries import CategoryQueries
 from ...utils.messages import message
 from ...utils.to_json import rows_to_json, message_to_json, row_to_json
-from ...utils.validation.category_validator import CategoryValidator
+from app.services.validation import CategoryValidator
 
 api = Api(category_blueprint)
 

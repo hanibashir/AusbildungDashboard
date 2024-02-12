@@ -49,15 +49,10 @@
                             {# {{ id_list|join(' ') }}#}
 
                             <form action="/dashboard" method="post" style="display: inline;">
-                                <input type="hidden" name="delete_post" value="
-
-
-
-
-
-
-
-                                        {% if post['post_id'] %}{{ post['post_id'] }}{% else %}{{ post['id'] }}{% endif %}">
+                                <input
+                                        type="hidden"
+                                        name="delete_post"
+                                        value="{{ post['post_id'] }}">
                                 <button class="btn btn-danger text-white" type="submit">Delete</button>
                             </form>
 
@@ -98,7 +93,7 @@
                         <td class="text-end">
                             <button class="btn btn-info text-white" type="submit">
                                 <a class="text-decoration-none text-white"
-                                   href="/dashboard/category?cat_id={{ cat['category_id'] }}&action=edit">Edit</a>
+                                   href="/dashboard/category?category_id={{ cat['category_id'] }}&action=edit">Edit</a>
                             </button>
 
                             <form action="/dashboard" method="post" style="display: inline;">

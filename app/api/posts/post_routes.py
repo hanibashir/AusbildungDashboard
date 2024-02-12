@@ -1,11 +1,11 @@
 from flask import request, make_response
 from flask_restful import Resource, Api
 from . import aus_page_blueprint
-from ...utils.constants import BAD_REQUEST, CREATED, NOT_FOUND, OK, UPDATED, api_routes_urls
+from ...utils.constants import BAD_REQUEST, CREATED, NOT_FOUND, OK, UPDATED
 from ...utils.api_queries.aus_page_queries import AusPageQueries
 from ...utils.messages import message
 from ...utils.to_json import row_to_json, message_to_json, rows_to_json
-from ...utils.validation.aus_page_validator import AusPageValidator
+from app.services.validation import AusPageValidator
 from ...models.aus_page import AusPage
 
 api = Api(aus_page_blueprint)

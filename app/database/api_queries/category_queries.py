@@ -1,7 +1,7 @@
 from app import db
 from app.models.category import Category
 from app.utils.constants import CONFLICT, CREATED, BAD_REQUEST, UPDATED
-from app.utils.dashboard_queries.queries import Queries
+from app.database.api_queries.queries import Queries
 
 
 class CategoryQueries(Queries):
@@ -27,13 +27,13 @@ class CategoryQueries(Queries):
         else:
             return False, ''
 
-    def insert_category(self, image_url=None):
+    def insert_category(self):
         # title, description, image_url
         try:
             new_cat = Category(
                 title=self.data['title'],
-                description=self.category_description(),
-                image_url=image_url
+                description=self.data['description'],
+                image_url=self.data['image_url']
             )
             # insert into categories table
             self.insert(new_cat)
@@ -45,7 +45,7 @@ class CategoryQueries(Queries):
         # title, description, image_url
         try:
             category.Title = self.data['title']
-            category.Description = self.category_description()
+            category.Description = self.data['description']
             category.ImageUrl = self.data['image_url']
 
             # commit changes to api_queries
@@ -63,9 +63,3 @@ class CategoryQueries(Queries):
             return True, self.message('category', 'DELETED')
         except self.sql_exception:
             return False, self.message('category', BAD_REQUEST)
-
-    def category_description(self):
-        if not self.data['description'] or self.data['description'] == '':
-            return "No description"
-
-        return self.data['description']

@@ -1,14 +1,14 @@
 import os
 from pathlib import Path
-from flask import flash, redirect, current_app, request, url_for, jsonify
+from flask import flash, redirect, current_app, request, url_for
 from app.utils.constants import BAD_REQUEST
-from app.utils.dashboard_queries.post.post_queries import PostService
-from app.utils.imageservice import ImageService
-from app.utils.validation.post.post_validator import PostValidator
+from app.database.dashboard_queries.post.post_queries import PostQueries
+from app.services.image_service import ImageService
+from app.services.validation.post.post_validator import PostValidator
 
 
 def validate_insert_or_update(command, data):
-    queries = PostService(data=data)
+    queries = PostQueries(data=data)
     image_service = ImageService()
 
     validated, validate_msg = PostValidator(data=data).validate_post_input()
@@ -28,7 +28,6 @@ def validate_insert_or_update(command, data):
         if command == 'insert':
             image_short_url = os.path.join(current_app.config["DEFAULT_POST_IMAGE"])
         elif command == 'update':
-
             image_short_url = data['old_img_url']
     else:  # there's image
         if command == 'insert':
@@ -52,8 +51,8 @@ def validate_insert_or_update(command, data):
         flash(insert_msg)
         return redirect(url_for('dashboard.home'))
     elif command == 'update':
-        update_msg = (PostService(data=data)
-                      .update_post(PostService().
+        update_msg = (PostQueries(data=data)
+                      .update_post(PostQueries().
                                    get_post_by_id(data['post_id']), image_url=image_short_url))
         flash(update_msg)
         return redirect(url_for('dashboard.home'))

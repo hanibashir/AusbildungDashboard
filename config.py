@@ -15,7 +15,8 @@ class Config:
     USERS_UPLOAD_FOLDER = "static/images/users"
     DEFAULT_USER_IMAGE = "static/images/user-blue-thumbnail.png"
 
-    CATS_UPLOAD_FOLDER = "static/images/category"
+    CATEGORY_UPLOAD_FOLDER = "static/images/category"
+    DEFAULT_CATEGORY_IMAGE = "static/images/default_category_image.png"
 
     # DB
     SQLALCHEMY_DATABASE_URI = 'sqlite:///ausbildung.sqlite'

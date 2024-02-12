@@ -2,11 +2,11 @@ from flask import make_response, request
 from flask_restful import Resource, Api
 from app.api.pages import page_blueprint
 from app.models.page import Page
-from app.utils.constants import OK, BAD_REQUEST, CREATED, NOT_FOUND, UPDATED, api_routes_urls
-from app.utils.api_queries.page_queries import PageQueries
+from app.utils.constants import OK, BAD_REQUEST, CREATED, NOT_FOUND, UPDATED
+from app.database.api_queries.page_queries import PageQueries
 from app.utils.messages import message
 from app.utils.to_json import rows_to_json, message_to_json, row_to_json
-from app.utils.validation.page_validator import PageValidator
+from app.services.validation.page_validator import PageValidator
 
 api = Api(page_blueprint)
 
