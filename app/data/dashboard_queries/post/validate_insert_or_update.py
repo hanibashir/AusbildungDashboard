@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from flask import flash, redirect, current_app, request, url_for
 from app.utils.constants import BAD_REQUEST
-from app.database.dashboard_queries.post.post_queries import PostQueries
+from app.data.dashboard_queries.post.post_queries import PostQueries
 from app.services.image_service import ImageService
 from app.services.validation.post.post_validator import PostValidator
 

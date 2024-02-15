@@ -8,7 +8,7 @@ from app.services.validation.user.user_validator import UserValidator
 from . import user_blueprint
 from app.utils.helpers import login_required
 from app.services.image_service import ImageService
-from app.database.dashboard_queries.user.user_queries import UserQueries
+from app.data.dashboard_queries.user.user_queries import UserQueries
 
 
 @user_blueprint.route("/user/profile", strict_slashes=False, methods=["GET", "POST"])

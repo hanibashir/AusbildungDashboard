@@ -1,7 +1,7 @@
 from flask import render_template, request, flash, url_for, redirect, current_app
 from . import dashboard_blueprint
-from app.database.dashboard_queries.post.post_queries import PostQueries
-from app.database.dashboard_queries.category.category_queries import CategoryQueries
+from app.data.dashboard_queries.post.post_queries import PostQueries
+from app.data.dashboard_queries.category.category_queries import CategoryQueries
 from ...utils.helpers import login_required
 from ...services.post.post_service import PostService
 

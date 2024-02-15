@@ -2,7 +2,7 @@ from app.views.dashboard.user import user_blueprint
 import os
 from flask import url_for, redirect, render_template, request, current_app, flash
 from app.services.validation.user.user_validator import UserValidator
-from app.database.dashboard_queries.user.user_queries import UserQueries
+from app.data.dashboard_queries.user.user_queries import UserQueries
 from app.services.image_service import ImageService
 
 

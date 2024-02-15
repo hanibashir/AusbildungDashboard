@@ -1,6 +1,6 @@
 from flask import request, render_template
 from .. import dashboard_blueprint
-from app.database.dashboard_queries.category.category_queries import CategoryQueries
+from app.data.dashboard_queries.category.category_queries import CategoryQueries
 from app.utils.helpers import login_required
 from app.utils.query_obj_to_dict import row_to_dict
 

@@ -1,4 +1,4 @@
-from app.database.dashboard_queries.post.post_queries import PostQueries
+from app.data.dashboard_queries.post.post_queries import PostQueries
 from app.services.image_service import ImageService
 from app.utils.query_obj_to_dict import row_to_dict
 from flask import current_app, flash

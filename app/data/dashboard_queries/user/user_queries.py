@@ -1,7 +1,7 @@
 from instance.base import db
 from app.utils.constants import CONFLICT, CREATED, BAD_REQUEST, UPDATED
-from app.database.dashboard_queries.queries import Queries
-from app.data.models import User
+from app.data.dashboard_queries.queries import Queries
+from app.data.models.user import User
 from werkzeug.security import generate_password_hash
 
 
