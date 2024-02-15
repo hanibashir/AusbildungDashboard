@@ -1,7 +1,7 @@
 from flask import make_response, request
 from flask_restful import Resource, Api
 from app.api.pages import page_blueprint
-from app.models.page import Page
+from app.data.models.page import Page
 from app.utils.constants import OK, BAD_REQUEST, CREATED, NOT_FOUND, UPDATED
 from app.database.api_queries.page_queries import PageQueries
 from app.utils.messages import message

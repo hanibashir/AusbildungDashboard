@@ -2,7 +2,7 @@ from flask import session
 from app import db
 from app.utils.constants import CREATED, BAD_REQUEST, UPDATED
 from app.database.dashboard_queries.queries import Queries
-from app.models.post import Post
+from app.data.models.post import Post
 
 
 class PostQueries(Queries):

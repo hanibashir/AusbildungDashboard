@@ -29,12 +29,7 @@ def create_app():
     app.register_blueprint(user_blueprint)
 
     # import api_queries models
-    from .models.user import User
-    from .models.post import Post
-    from .models.page import Page
-    from .models.category import Category
-    from .models.role import Role
-    from .models.user_role import UserRole
+    from app.data.models.role import Role
     # create api_queries tables
     with app.app_context():
         db.create_all()

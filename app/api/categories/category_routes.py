@@ -1,7 +1,7 @@
 from flask import request, make_response
 from flask_restful import Resource, Api
 from . import category_blueprint
-from ...models.category import Category
+from app.data.models import Category
 from ...utils.constants import OK, BAD_REQUEST, CONFLICT, CREATED, NOT_FOUND, UPDATED
 from app.database.api_queries.category_queries import CategoryQueries
 from ...utils.messages import message

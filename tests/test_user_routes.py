@@ -1,5 +1,5 @@
 from datetime import datetime
-from app.models.user import User
+from app.data.models import User
 from app.utils.constants import api_routes_urls, CREATED, OK, UPDATED, NOT_FOUND
 from tests import BaseTestCase
 

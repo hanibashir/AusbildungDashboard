@@ -1,6 +1,6 @@
 from ..image_service import ImageService
 from ...database.dashboard_queries.category.category_queries import CategoryQueries
-from ...models.category import Category
+from app.data.models import Category
 from ...services.validation.category.category_validator import CategoryValidator
 from flask import request, current_app
 from ...utils.constants import CONFLICT

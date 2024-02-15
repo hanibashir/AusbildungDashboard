@@ -6,7 +6,7 @@ from ...utils.api_queries.aus_page_queries import AusPageQueries
 from ...utils.messages import message
 from ...utils.to_json import row_to_json, message_to_json, rows_to_json
 from app.services.validation import AusPageValidator
-from ...models.aus_page import AusPage
+from app.data.models import AusPage
 
 api = Api(aus_page_blueprint)
 

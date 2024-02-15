@@ -1,7 +1,7 @@
 from flask import request, make_response
 from flask_restful import Resource, Api
 from . import user_blueprint
-from ...models.user import User
+from app.data.models.user import User
 from ...utils.constants import OK, BAD_REQUEST, CONFLICT, CREATED, NOT_FOUND, UPDATED
 from app.database.api_queries.user_queries import UserQueries
 from app.services.validation import UserValidator

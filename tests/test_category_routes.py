@@ -1,5 +1,5 @@
 import unittest
-from app.models.category import Category
+from app.data.models.category import Category
 from app.utils.constants import api_routes_urls, CREATED, OK, UPDATED, NOT_FOUND
 from tests import BaseTestCase
 
